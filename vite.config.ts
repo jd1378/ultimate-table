@@ -9,22 +9,11 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from 'tailwindcss';
-// import vueJsx from '@vitejs/plugin-vue-jsx';
-// import VueMacros from 'unplugin-vue-macros/vite';
 
 emptyDir(resolve(__dirname, 'dist'));
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    // VueMacros({
-    //   plugins: {
-    //     vue: vue(),
-    //     //vueJsx: vueJsx()
-    //   },
-    // }),
-  ],
+  plugins: [vue()],
   css: {
     postcss: {
       plugins: [tailwindcss()],
@@ -36,7 +25,7 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: 'src/entry.ts',
       name: 'VueGridTable',
-      formats: ['es', 'cjs', 'umd'],
+      formats: ['es', 'cjs'],
       fileName(format) {
         let extension = 'js';
         if (format === 'es') {
