@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // other settings
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "outDir": "dist",
+    "declarationDir": "dist",
+    "baseUrl": "./src",
+  },
+  "include": [
+    "./**/*", // All non-hidden files at any directory level
+    "./**/.*", // Hidden dotfiles like .eslintrc.js at any level
+    "./**/.*.[tj]s?(x)", // All hidden TS/JS dotfiles
+    "./**/*.vue",
+    "./**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist", "coverage"],
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ],
+  "vueCompilerOptions": { 
+    "target": 3,
+  }
+}
