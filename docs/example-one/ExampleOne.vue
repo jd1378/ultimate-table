@@ -59,7 +59,7 @@ const fields: FieldsFromType<User> = [
   },
   {
     key: 'firstName',
-    label: 'First Name',
+    // label: 'First Name', // this is automatically generated if not provided
     size: 10,
     group: '1',
   },

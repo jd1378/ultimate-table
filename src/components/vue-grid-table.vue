@@ -21,11 +21,11 @@
           'grid-table__field-group': structureFields.length > 1,
         }"
         :style="{
-            '--cg-tp':
-              structureFields.length > 1
-                ? groupGridTemplates[structureFields[0].group!]
-                : undefined,
-          }"
+          '--cg-tp':
+            structureFields.length > 1
+              ? groupGridTemplates[structureFields[0].group!]
+              : undefined,
+        }"
       >
         <div
           v-for="(field, i) in structureFields"
@@ -96,11 +96,11 @@
             'grid-table__field-group': structureFields.length > 1,
           }"
           :style="{
-              '--cg-tp':
-                structureFields.length > 1
-                  ? groupGridTemplates[structureFields[0].group!]
-                  : undefined,
-            }"
+            '--cg-tp':
+              structureFields.length > 1
+                ? groupGridTemplates[structureFields[0].group!]
+                : undefined,
+          }"
         >
           <div
             v-for="field in structureFields"
@@ -129,6 +129,7 @@
 <script lang="ts">
 import type { F } from 'ts-toolbelt';
 import { type PropType, computed } from 'vue';
+import { toStartCase } from '../utils/string';
 
 export type Field<K extends string, U> = {
   key: K;
@@ -149,11 +150,10 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 <script
   setup
   lang="ts"
-  generic="U, const K extends keyof U & string | string, const I extends ArrayLike<unknown>, const T extends readonly Field<K, U[K extends keyof U ? K : never] | unknown>[] | readonly string[]">
-/**
+  generic="U, const K extends keyof U & string | string, const I extends ArrayLike<unknown>, const T extends readonly Field<K, U[K extends keyof U ? K : never] | unknown>[] | readonly string[]"
+>
+/*
  * The table grid overview
- *
- * original idea: https://www.freecodecamp.org/news/https-medium-com-nakayama-shingo-creating-responsive-tables-with-pure-css-using-the-grid-layout-module-8e0ea8f03e83/
  *
  * think of `role="rowgroup"` as `<thead/>`, `<tbody/>`, `<tfoot>`
  * each rowgroup, can have many rows
@@ -200,6 +200,26 @@ defineSlots<
 
 const props = withDefaults(
   defineProps<{
+    /**
+     * `items` is the table data in array format, where each record (row) data are keyed objects. Example format:
+     *  ```js
+     *  const items = [
+     *    { age: 32, first_name: 'Cyndi' },
+     *    { age: 27, first_name: 'Havij' },
+     *    { age: 42, first_name: 'Robert' }
+     *  ]
+     * ```
+     *
+     * `<GridTable>` automatically samples the first row to extract field names (the keys in the record data). Field names are automatically "humanized" by converting snake_case and camelCase to individual words and capitalizes each word. Example conversions:
+     *
+     * - `first_name` becomes `First Name`
+     * - `last-name` becomes `Last Name`
+     * - `age` becomes `Age`
+     * - `YEAR` remains `YEAR`
+     * - `isActive` remains `Is Active`
+     *
+     * These titles will be displayed in the table header, in the order they appear in the first record of data. See the `Fields` prop below for customizing how field headings appear.
+     */
     items?: I;
     fields?: T;
     /** table is in pending state ? */
@@ -226,16 +246,23 @@ function isStringArray(
 
 const normalizedFields = computed(() => {
   if (!props.fields && props.items?.length) {
-    return Object.keys(props.items[0]!).map((key) => ({ key })) as Field<
-      K,
-      FT
-    >[];
+    return Object.keys(props.items[0]!).map((key) => ({
+      key,
+      label: toStartCase(key),
+    })) as Field<K, FT>[];
   }
 
   if (isStringArray(props.fields)) {
-    return props.fields.map((s) => ({ key: s }) as any as Field<K, FT>);
+    return props.fields.map(
+      (s) => ({ key: s, label: toStartCase(s) }) as any as Field<K, FT>,
+    );
+  } else if (props.fields) {
+    return (props.fields as Field<K, FT>[]).map((f) => {
+      if (f['label'] || !f['key']) return f;
+      return { ...f, label: toStartCase(f['key']) };
+    });
   }
-  return props.fields as Field<K, FT>[];
+  return [] as Field<K, FT>[];
 });
 
 function getFieldContent(item: any, field: Field<K, FT>) {
@@ -346,9 +373,8 @@ const gridColumnTemplate = computed(() => {
 const groupGridTemplates = computed(() => {
   const def: Record<string, string> = {};
   for (const k of Object.keys(stackingStructure.value.sizeMap)) {
-    def[k] = `repeat(auto-fit, minmax(${Math.max(
-      ...stackingStructure.value.sizeMap[k],
-    )}ch, 1fr))`;
+    def[k] =
+      `repeat(auto-fit, minmax(${Math.max(...stackingStructure.value.sizeMap[k])}ch, 1fr))`;
   }
 
   return def;
