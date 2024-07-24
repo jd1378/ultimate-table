@@ -1,6 +1,6 @@
 <template>
   <ol
-    class="grid-table mb-3"
+    class="grid-table"
     role="table"
     aria-rowcount="-1"
     :class="{
@@ -10,55 +10,57 @@
       '--tb-tp': gridColumnTemplate,
     }"
   >
+    <slot name="top"></slot>
     <!-- table header -->
-    <li role="row" class="grid-table__row">
-      <div
-        v-for="(structureFields, index) in stackingStructure.fields"
-        :key="'h-' + index"
-        :class="{
-          'grid-table__field-group': structureFields.length > 1,
-        }"
-        :style="{
-          '--cg-tp':
-            structureFields.length > 1
-              ? groupGridTemplates[structureFields[0].group!]
-              : undefined,
-        }"
-      >
+    <slot name="thead" :fields="(fields as T)">
+      <li role="row">
         <div
-          v-for="(field, i) in structureFields"
-          :key="'hf-' + i"
-          class="grid-table__cell"
-          role="columnheader"
-          :aria-sort="getSortAria(getFieldSort(field.key))"
+          v-for="(structureFields, index) in stackingStructure.fields"
+          :key="'h-' + index"
+          :data-group="structureFields.length > 1"
+          :style="{
+            '--cg-tp':
+              structureFields.length > 1
+                ? groupGridTemplates[structureFields[0].group!]
+                : undefined,
+          }"
         >
-          <slot name="head()" :field="field" :sort="getFieldSort(field.key)">
-            <slot
-              :name="`head(${field.key})`"
-              :item="field"
-              :sort="getFieldSort(field.key)"
-            >
-              {{ field.label || field.key }}
+          <div
+            v-for="(field, i) in structureFields"
+            :key="'hf-' + i"
+            role="columnheader"
+            :aria-sort="getSortAria(getFieldSort(field.key))"
+          >
+            <slot name="head()" :field="field" :sort="getFieldSort(field.key)">
+              <slot
+                :name="`head(${field.key})`"
+                :item="field"
+                :sort="getFieldSort(field.key)"
+              >
+                {{ field.label || field.key }}
+              </slot>
             </slot>
-          </slot>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    </slot>
     <!-- table body -->
-    <slot v-if="$slots['body']" name="body" :items="(items as I)"></slot>
+    <slot
+      v-if="$slots['tbody']"
+      name="tbody"
+      :items="(items as I)"
+      :fields="fields"
+    ></slot>
     <template v-else-if="(items as any)?.length">
       <li
         v-for="(item, i) in items as RowDataType[]"
         :key="(item as any).id || 'r' + i"
         role="row"
-        class="grid-table__row"
       >
         <div
           v-for="(structureFields, index) in stackingStructure.fields"
           :key="'header-' + index"
-          :class="{
-            'grid-table__field-group': structureFields.length > 1,
-          }"
+          :data-group="structureFields.length > 1"
           :style="{
             '--cg-tp':
               structureFields.length > 1
@@ -70,7 +72,6 @@
             v-for="field in structureFields"
             :key="field.key"
             role="cell"
-            class="grid-table__cell"
             :data-name="field.label || field.key"
           >
             <slot :name="`cell(${field.key})`" :item="item">
@@ -81,12 +82,12 @@
       </li>
     </template>
     <slot v-else name="empty">
-      <div
-        class="grid-table__controls flex h-[10rem] flex-col items-center justify-center xl:h-[14rem]"
-      >
-        <span class="text-xl font-bold">No Data</span>
+      <div class="grid-table" data-row>
+        <span>No Data</span>
       </div>
     </slot>
+    <slot name="tfoot" :fields="(fields as T)"></slot>
+    <slot name="bottom"></slot>
   </ol>
 </template>
 
@@ -173,10 +174,18 @@ defineSlots<
   } & {
     /** replaces all `head(fieldKey)` slots if used. it is called multiple times with each field passed in it's scope. */
     'head()'(props: { field: Field<K, FT>; sort: 1 | -1 | 0 }): any;
-    /** replaces table body rows if set. */
-    body(props: { items: I }): any;
+    /** replaces default column headers */
+    thead(props: { fields: T }): any;
+    /** replaces table rows if used. */
+    tbody(props: { items: I; fields: T }): any;
+    /** rendered after the tbody slot. */
+    tfoot(props: { items: I; fields: T }): any;
     /** is rendered when there's no `items` to render. */
     empty(): any;
+    /** is rendered as a whole row at the top of the table. */
+    top(): any;
+    /** is rendered as a whole row at the bottom of the table. */
+    bottom(): any;
   }
 >();
 
@@ -421,54 +430,57 @@ function getSortAria(sort: 1 | -1 | 0) {
 }
 @media screen and (max-width: 767.777px) {
   /* Don't display the header on small screens*/
-  .grid-table__row:first-of-type {
+  .grid-table [role='row']:first-of-type {
     @apply hidden;
   }
-  .grid-table__row {
+  .grid-table [role='row'] {
     @apply bg-gray-600/20;
   }
 
-  .grid-table__cell {
+  .grid-table [role='cell'],
+  .grid-table [role='columnheader'] {
     @apply flex flex-wrap items-center justify-between;
   }
-  .grid-table__cell {
+  .grid-table [role='cell'],
+  .grid-table [role='columnheader'] {
     @apply text-end;
   }
-  .grid-table__cell > * {
+  .grid-table [role='cell'] > *,
+  .grid-table [role='columnheader'] > * {
     @apply mx-0;
   }
-  .grid-table__cell::before {
+  .grid-table [role='cell']::before,
+  .grid-table [role='columnheader']::before {
     content: attr(data-name) ':';
     @apply text-start;
   }
 }
 @media screen and (min-width: 768px) {
-  .grid-table__row {
+  .grid-table [role='row'] {
     grid-template-columns: var(--tb-tp);
     @apply grid items-center;
   }
-  .grid-table__row:nth-child(odd) {
+  .grid-table [role='row']:nth-child(odd) {
     @apply bg-gray-600/20;
   }
-  .grid-table__field-group {
+  .grid-table [data-group] {
     grid-template-columns: var(--cg-tp);
     @apply grid;
   }
-  .grid-table__cell {
+  .grid-table [role='cell'],
+  .grid-table [role='columnheader'] {
     text-align: center;
     @apply flex items-center justify-center;
   }
 }
-.grid-table__controls {
-  grid-column: 1 / -1;
-}
-.grid-table__row {
+.grid-table [role='row'] {
   @apply m-0 list-none rounded-e-md rounded-s-md p-0;
 }
-.grid-table__cell {
+.grid-table [role='cell'],
+.grid-table [role='columnheader'] {
   @apply p-3;
 }
-.grid-table__cell[role='columnheader'] {
-  @apply overflow-hidden overflow-ellipsis whitespace-nowrap p-3 md:overflow-visible;
+.grid-table [role='columnheader'] {
+  @apply overflow-hidden overflow-ellipsis whitespace-nowrap md:overflow-visible;
 }
 </style>
