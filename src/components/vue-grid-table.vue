@@ -1,9 +1,10 @@
 <template>
   <ol
-    class="vue-grid-table"
     role="table"
     aria-rowcount="-1"
     :style="{
+      display: 'grid',
+      'grid-template-columns': '1fr',
       '--tb-tp': gridColumnTemplate,
     }"
   >
@@ -418,10 +419,4 @@ function getSortAria(sort: 1 | -1 | 0) {
   }
 }
 </script>
-
-<style lang="css" scoped>
-.vue-grid-table {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-</style>
+ 
