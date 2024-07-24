@@ -1,24 +1,25 @@
 <template>
-  <GridTable
+  <VueGridTable
+    class="vue-grid-table"
     :items="users"
     :fields="fields"
     :sort="{ id: 1 }"
-    class="md:overflow-x-auto"
   >
     <template #cell(id)="{ item }">#{{ item.id }}</template>
     <template #head()="{ field, sort }">
       {{ field.label }}
-      <button type="button" class="ms-1 hover:bg-white/10 rounded px-0.5">
-        {{ sort === 1 ? '↑' : sort === -1 ? '↓' : '' }}
+      <button v-if="sort" type="button" class="sort-btn">
+        {{ sort === 1 ? '↑' : '↓' }}
       </button>
     </template>
-  </GridTable>
+  </VueGridTable>
 </template>
 
 <script lang="ts" setup>
-import { GridTable } from '../../src/entry';
-import type { FieldsFromType } from '../../src/entry';
+import { VueGridTable } from '@/entry';
+import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from './utils.ts';
+import '@/styles/basic.borderless.css';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en', {
   day: 'numeric',
@@ -66,70 +67,15 @@ const fields: FieldsFromType<User> = [
 ] as const;
 </script>
 
-<style lang="css">
-.vue-grid-table {
-  /* puts some spce between the field label and the value in card display */
-  @apply gap-3 md:gap-0;
+<style>
+.sort-btn {
+  margin-inline-start: 0.25rem;
+  border-radius: 0.25rem;
+  padding-left: 0.125rem;
+  padding-right: 0.125rem;
 }
-@media (max-width: theme('screens.md')) {
-  /* Don't display the header on small screens*/
-  .vue-grid-table [role='row']:first-of-type {
-    @apply hidden;
-  }
-
-  .vue-grid-table [role='row'] {
-    @apply bg-gray-600/20;
-  }
-
-  .vue-grid-table [role='cell'],
-  .vue-grid-table [role='columnheader'] {
-    @apply flex flex-wrap items-center justify-between;
-  }
-  .vue-grid-table [role='cell'],
-  .vue-grid-table [role='columnheader'] {
-    @apply text-end;
-  }
-  .vue-grid-table [role='cell'] > *,
-  .vue-grid-table [role='columnheader'] > * {
-    @apply mx-0;
-  }
-  .vue-grid-table [role='cell']::before,
-  .vue-grid-table [role='columnheader']::before {
-    content: attr(data-name) ':';
-    @apply text-start;
-  }
-}
-@media (min-width: theme('screens.md')) {
-  .vue-grid-table [role='row'] {
-    grid-template-columns: var(--tb-tp);
-    @apply grid items-center;
-  }
-  .vue-grid-table [role='row']:nth-child(odd) {
-    @apply bg-gray-600/20;
-  }
-
-  .vue-grid-table [role='row'][data-thead] {
-    @apply bg-gray-400/20;
-  }
-
-  .vue-grid-table [data-group] {
-    grid-template-columns: var(--cg-tp);
-    @apply grid;
-  }
-  .vue-grid-table [role='cell'],
-  .vue-grid-table [role='columnheader'] {
-    text-align: center;
-    @apply flex items-center justify-center;
-  }
-}
-.vue-grid-table [role='row'] {
-  @apply m-0 list-none rounded-e-md rounded-s-md p-0;
-}
-.vue-grid-table [role='cell'],
-.vue-grid-table [role='columnheader'] {
-  @apply p-3;
-}
-.vue-grid-table [role='columnheader'] {
-  @apply overflow-hidden overflow-ellipsis whitespace-nowrap md:overflow-visible;
+.sort-btn:hover {
+  background-color: rgb(255 255 255 / 0.1);
 }
 </style>
+ 

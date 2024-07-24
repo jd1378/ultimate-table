@@ -1,5 +1,6 @@
 <template>
   <ol
+    class="vue-grid-table"
     role="table"
     aria-rowcount="-1"
     :style="{
@@ -71,7 +72,7 @@
             v-for="field in structureFields"
             :key="field.key"
             role="cell"
-            :data-name="field.label || field.key"
+            :data-label="field.label || field.key"
           >
             <slot :name="`cell(${field.key})`" :item="item">
               {{ getFieldContent(item, field) }}
@@ -81,7 +82,7 @@
       </li>
     </template>
     <slot v-else name="empty">
-      <div class="grid-table" data-row>
+      <div class="grid-table">
         <span>No Data</span>
       </div>
     </slot>

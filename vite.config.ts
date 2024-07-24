@@ -10,11 +10,23 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from 'tailwindcss';
 import tsconfigPaths from 'vite-tsconfig-paths';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 
 emptyDir(resolve(__dirname, 'dist'));
 
 export default defineConfig({
-  plugins: [vue(), tsconfigPaths()],
+  plugins: [
+    vue(),
+    tsconfigPaths(),
+    viteStaticCopy({
+      targets: [
+        {
+          src: 'src/styles',
+          dest: '.',
+        },
+      ],
+    }),
+  ],
   css: {
     postcss: {
       plugins: [tailwindcss()],
@@ -26,28 +38,27 @@ export default defineConfig({
       // Could also be a dictionary or array of multiple entry points
       entry: 'src/entry.ts',
       name: 'VueGridTable',
-      formats: ['es', 'cjs'],
+      formats: ['es', 'cjs', 'umd'],
       fileName(format) {
         let extension = 'js';
         if (format === 'es') {
           extension = 'm' + extension;
         } else if (format === 'cjs') {
           extension = 'c' + extension;
+        } else if (format === 'umd') {
+          extension = 'umd.c' + extension;
         }
-        const fileName = `vue-grid-table.${format}.${extension}`;
-        return fileName;
+        return `vue-grid-table.${extension}`;
       },
     },
     rollupOptions: {
-      // make sure to externalize deps that should not be bundled
-      // into your library
       input: {
         main: resolve(__dirname, 'src/entry.ts'),
       },
       external: ['vue'],
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'entry.css') return 'vue-grid-table.css';
+          if (assetInfo.name === 'main.css') return 'vue-grid-table.css';
           return assetInfo.name as string;
         },
         exports: 'named',
