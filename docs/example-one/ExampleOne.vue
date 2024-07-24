@@ -105,7 +105,7 @@ const fields: FieldsFromType<User> = [
   /* puts some spce between the field label and the value in card display */
   @apply gap-3 md:gap-0;
 }
-@media (max-width: 767.777px) {
+@media (max-width: theme('screens.md')) {
   /* Don't display the header on small screens*/
   .vue-grid-table [role='row']:first-of-type {
     @apply hidden;
@@ -133,7 +133,7 @@ const fields: FieldsFromType<User> = [
     @apply text-start;
   }
 }
-@media (min-width: 768px) {
+@media (min-width: theme('screens.md')) {
   .vue-grid-table [role='row'] {
     grid-template-columns: var(--tb-tp);
     @apply grid items-center;
