@@ -49,7 +49,7 @@
   .vue-grid-table [role='row'] {
     grid-template-columns: var(--tb-tp);
     display: grid;
-    align-items: center;
+    align-items: stretch;
   }
   
   /* most important part for table (part 2) */
