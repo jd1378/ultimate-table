@@ -3,6 +3,7 @@ import * as path from "path";
 import { globbySync } from "globby";
 import { fileURLToPath } from 'url';
 import vueLiveMd from './vue-live-md-it';
+import tsconfigPaths from 'vite-tsconfig-paths';
 // import Vue from '@vitejs/plugin-vue';
 // import VueMacros from 'unplugin-vue-macros/vite';
 
@@ -49,10 +50,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
-      // VueMacros({
-      //   plugins: { 
-      //   },
-      // }),
+      tsconfigPaths(),
     ],
     server: {
       fs: {

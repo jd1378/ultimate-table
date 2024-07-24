@@ -9,11 +9,12 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import tailwindcss from 'tailwindcss';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 emptyDir(resolve(__dirname, 'dist'));
 
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), tsconfigPaths()],
   css: {
     postcss: {
       plugins: [tailwindcss()],
@@ -54,11 +55,6 @@ export default defineConfig({
           vue: 'Vue',
         },
       },
-    },
-  },
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
     },
   },
   // test: {

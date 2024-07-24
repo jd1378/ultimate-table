@@ -28,6 +28,11 @@ module.exports = defineConfig({
       name.replace(/\.(vue|ts)$/, '.md'),
     );
   },
+  apiOptions: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
   defaultExamples: false,
   async propsParser(componentPath, _, event) {
     if (event === 'add') {
