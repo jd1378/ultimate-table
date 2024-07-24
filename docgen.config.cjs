@@ -3,7 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-const { defineConfig } = require('vue-docgen-cli');
+const { defineConfig, defaultTemplates } = require('vue-docgen-cli');
+const mdclean = defaultTemplates.mdclean;
+const renderTags = defaultTemplates.renderTags;
 const { parseMulti } = require('vue-docgen-api');
 const path = require('path');
 const { createComponentMetaChecker } = require('vue-component-meta');
@@ -114,6 +116,10 @@ module.exports = defineConfig({
       };
     });
   },
+  templates: {
+    ...defaultTemplates,
+    props: propsTemplate,
+  },
 });
 
 /**
@@ -183,4 +189,43 @@ function renderEventProperty(p) {
       schema: p.schema,
     },
   };
+}
+
+function propTmplRow(props) {
+  let ret = '';
+
+  props.forEach((pr) => {
+    const p = mdclean(pr.name);
+    const n = mdclean(
+      pr.type?.name ?? '-' + (pr.required ? ` (required)` : ''),
+    );
+    const d = mdclean(pr.default ?? '');
+
+    ret += `| [${p}](#${p}) | ${n} | ${d} |\n`;
+  });
+  return ret;
+}
+
+function propTmplSections(props) {
+  let ret = '';
+
+  props.forEach((pr) => {
+    const p = mdclean(pr.name);
+    let t = pr.description ?? '';
+    t += mdclean(renderTags(pr.tags));
+
+    ret += `### ${p}\n ${t} \n`;
+  });
+  return ret;
+}
+
+function propsTemplate(props, opt = {}) {
+  return `
+${opt.isSubComponent || opt.hasSubComponents ? '#' : ''}## Props
+
+  | Prop name     | Type      | Default     |
+  | ------------- | --------- | ----------- |
+  ${propTmplRow(props)}
+  ${propTmplSections(props)}
+  `;
 }
