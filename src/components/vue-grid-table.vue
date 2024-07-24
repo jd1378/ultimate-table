@@ -4,8 +4,6 @@
     role="table"
     aria-rowcount="-1"
     :class="{
-      'text-neutral-400': hasDataButPending,
-      'cursor-wait': hasDataButPending,
       'md:overflow-x-auto': allowOverflow,
     }"
     :style="{
@@ -32,56 +30,22 @@
           :key="'hf-' + i"
           class="grid-table__cell"
           role="columnheader"
-          :aria-sort="
-            field.key in sort
-              ? sort[field.key] === -1
-                ? 'descending'
-                : 'ascending'
-              : 'none'
-          "
+          :aria-sort="getSortAria(getFieldSort(field.key))"
         >
-          <!-- <FpButton
-            v-if="field.sortable"
-            variant="none"
-            class="group -m-2 p-2"
-            :class="{
-              'bg-dashboard-section/20': field.key in sort,
-              'hover:bg-dashboard-section/18': field.key in sort,
-            }"
-            @click="$emit('toggleSort', field.key)"
-          >
-            {{ field.label || field.key }}
-            <svgo-polygon-down
-              class="ms-2 text-[0.6em]"
-              :class="{
-                'text-white/10': !(field.key in sort),
-                'group-hover:text-neutral-300/40': !(field.key in sort),
-                'rotate-180': field.key in sort && sort[field.key] === 1,
-              }"
-            />
-          </FpButton>
-          <template v-else> -->
-          {{ field.label || field.key }}
-          <!-- </template> -->
+          <slot name="head()" :field="field" :sort="getFieldSort(field.key)">
+            <slot
+              :name="`head(${field.key})`"
+              :item="field"
+              :sort="getFieldSort(field.key)"
+            >
+              {{ field.label || field.key }}
+            </slot>
+          </slot>
         </div>
       </div>
     </li>
     <!-- table body -->
-    <slot name="pending" v-if="!(items as any)?.length && pending">
-      <div
-        class="grid-table__controls flex h-[10rem] flex-col items-center justify-center xl:h-[14rem]"
-      >
-        <!-- <svgo-refresh class="animate-spin text-6xl will-change-transform" /> -->
-      </div>
-    </slot>
-    <slot v-else-if="error" name="error">
-      <div
-        class="grid-table__controls flex h-[10rem] flex-col items-center justify-center xl:h-[14rem]"
-      >
-        <span class="mb-2">Error.</span>
-        <!-- <RetryButton @click="refresh && refresh()" /> -->
-      </div>
-    </slot>
+    <slot v-if="$slots['body']" name="body" :items="(items as I)"></slot>
     <template v-else-if="(items as any)?.length">
       <li
         v-for="(item, i) in items as RowDataType[]"
@@ -132,12 +96,17 @@ import { type PropType, computed } from 'vue';
 import { toStartCase } from '../utils/string';
 
 export type Field<K extends string, U> = {
+  /** the key which will be used to access data of this field on each of your `items` */
   key: K;
+  /** the label of this field that is shown in table header */
   label?: string;
+  /** can this field be sorted? useful for creating wrapper components. */
   sortable?: boolean;
+  /** if set, will be used to format the data of this field in each row. */
   formatter?: (value: unknown) => string;
+  /** type of this field. used for defining `fields` prop of the table. */
   type?: PropType<U>;
-  /** average content length of this field in characters (ch) unit */
+  /** average content length of this field in characters (ch) unit. columns of this field won't be smaller than this size */
   size?: number;
   /** groups with same name will be rendered near
    *  each other and stacked on smaller screens */
@@ -192,9 +161,22 @@ defineSlots<
   } & {
     [C in `cell(${string})`]: (props: { item: RowDataType }) => any;
   } & {
+    [C in `head(${CellNames & string})`]: (props: {
+      field: Field<K, FT>;
+      sort: 1 | -1 | 0;
+    }) => any;
+  } & {
+    [C in `head(${string})`]: (props: {
+      field: Field<K, FT>;
+      sort: 1 | -1 | 0;
+    }) => any;
+  } & {
+    /** replaces all `head(fieldKey)` slots if used. it is called multiple times with each field passed in it's scope. */
+    'head()'(props: { field: Field<K, FT>; sort: 1 | -1 | 0 }): any;
+    /** replaces table body rows if set. */
+    body(props: { items: I }): any;
+    /** is rendered when there's no `items` to render. */
     empty(): any;
-    pending(): any;
-    error(): any;
   }
 >();
 
@@ -202,12 +184,12 @@ const props = withDefaults(
   defineProps<{
     /**
      * `items` is the table data in array format, where each record (row) data are keyed objects. Example format:
-     *  ```js
-     *  const items = [
-     *    { age: 32, first_name: 'Cyndi' },
-     *    { age: 27, first_name: 'Havij' },
-     *    { age: 42, first_name: 'Robert' }
-     *  ]
+     * ```js
+     * const items = [
+     *   { age: 32, first_name: 'Cyndi' },
+     *   { age: 27, first_name: 'Havij' },
+     *   { age: 42, first_name: 'Robert' }
+     * ]
      * ```
      *
      * `<GridTable>` automatically samples the first row to extract field names (the keys in the record data). Field names are automatically "humanized" by converting snake_case and camelCase to individual words and capitalizes each word. Example conversions:
@@ -221,22 +203,56 @@ const props = withDefaults(
      * These titles will be displayed in the table header, in the order they appear in the first record of data. See the `Fields` prop below for customizing how field headings appear.
      */
     items?: I;
+    /**
+     * The fields prop is used to customize the table columns headings, in which order the columns of data are displayed, in what groups they stack on and what is the minimum width they require in `ch` units.
+     *
+     * Fields can be provided as a simple array or an array of objects. Internally the fields data will be normalized into the array of objects format.
+     * Events or slots that include the column field data will be in the normalized field object format (array of objects for fields, or an object for an individual field).
+     * Example:
+     * ```js
+     *  const fields = [
+     *    {
+     *      key: 'id',
+     *      size: 3,
+     *    },
+     *    {
+     *      key: 'firstName',
+     *      // label: 'First Name', // this is automatically generated if not provided
+     *      size: 10,
+     *      group: '1', // will be stacked with lastName when there's no room to show beside each other
+     *    },
+     *    {
+     *      key: 'lastName',
+     *      label: 'Last Name',
+     *      size: 10,
+     *      group: '1',
+     *    },
+     *  ]
+     * ```
+     */
     fields?: T;
-    /** table is in pending state ? */
-    pending?: boolean;
-    /** table is in error state ? */
-    error?: boolean;
-    /** table's refresh method */
-    refresh?: () => void;
-    sort?: Record<string, number>;
+    /** Setting this to `true` allows the table to overflow horizontally when there's no room to show all columns. Defaults to `true` */
     allowOverflow?: boolean;
+    /**
+     * sets `aria-sort` of table header cell to `ascending`, `descending` or `none` based on given values of `1`, `-1` and `0`. Example:
+     *
+     * ```js
+     * const sort = {
+     *   first_name: 1, // ascending
+     *   last_name: -1, // descending
+     *   age: 0,        // none
+     * }
+     * ```
+     */
+    sort?: Record<CellNames, 1 | -1 | 0> | Record<string, 1 | -1 | 0>;
   }>(),
-  { refresh: undefined, items: [] as any, fields: undefined, sort: () => ({}) },
+  {
+    items: [] as any,
+    fields: undefined,
+    sort: () => ({}) as any,
+    allowOverflow: true,
+  },
 );
-
-defineEmits<{ (e: 'toggleSort', col: string): void }>();
-
-const hasDataButPending = computed(() => props.items?.length && props.pending);
 
 function isStringArray(
   array: readonly unknown[] | undefined,
@@ -379,6 +395,24 @@ const groupGridTemplates = computed(() => {
 
   return def;
 });
+
+function getFieldSort(key: string) {
+  if (props.sort) {
+    return props.sort[key] || 0;
+  }
+  return 0;
+}
+
+function getSortAria(sort: 1 | -1 | 0) {
+  switch (sort) {
+    case 1:
+      return 'ascending';
+    case -1:
+      return 'descending';
+    default:
+      return 'none';
+  }
+}
 </script>
 
 <style lang="css" scoped>

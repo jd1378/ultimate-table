@@ -1,6 +1,12 @@
 <template>
-  <GridTable :items="users" :fields="fields" allow-overflow>
+  <GridTable :items="users" :fields="fields" :sort="{ id: 1 }">
     <template #cell(id)="{ item }">#{{ item.id }}</template>
+    <template #head()="{ field, sort }">
+      {{ field.label }}
+      <button type="button" class="ms-1 hover:bg-white/10 rounded px-0.5">
+        {{ sort === 1 ? '↑' : sort === -1 ? '↓' : '' }}
+      </button>
+    </template>
   </GridTable>
 </template>
 
@@ -15,7 +21,6 @@ type User = {
   lastName: string;
   email: string;
   memberSince: Date;
-  balance: number;
   role: string;
 };
 
@@ -38,7 +43,6 @@ function generateUsers(length: number = 7) {
       memberSince: new Date(
         Date.now() - Math.floor(Math.random() * 100000000000),
       ),
-      balance: Math.floor(Math.random() * 1000),
       role: takeRandom(roles),
     });
   }
