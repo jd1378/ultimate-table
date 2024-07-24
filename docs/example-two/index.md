@@ -1,6 +1,6 @@
 # Example
 
-Full example using the component:
+an example of borderless style of the table: (reload the page if you see borders from previous example)
 
 ```vue live resizable
 <template>

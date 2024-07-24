@@ -1,6 +1,6 @@
 # Example
 
-Full example using the component:
+an example of bordered style of the table:
 
 ```vue live resizable
 <template>

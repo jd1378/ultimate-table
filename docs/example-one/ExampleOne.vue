@@ -37,7 +37,6 @@ const fields: FieldsFromType<User> = [
     key: 'email',
     label: 'Email',
     size: 20,
-    group: '1',
   },
   {
     key: 'memberSince',
