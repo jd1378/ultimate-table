@@ -2,12 +2,11 @@
 
 ## Props
 
-| Prop name                       | Type                                                                               | Default     |
-| ------------------------------- | ---------------------------------------------------------------------------------- | ----------- |
-| [items](#items)                 | ArrayLike&lt;unknown&gt;                                                           | [] as any   |
-| [fields](#fields)               | readonly string[] \| readonly Field&lt;string, unknown&gt;[]                       | undefined   |
-| [allowOverflow](#allowOverflow) | boolean                                                                            | true        |
-| [sort](#sort)                   | Record&lt;string, 0 \| 1 \| -1&gt; \| Record&lt;string \| number, 0 \| 1 \| -1&gt; | ({}) as any |
+| Prop name         | Type                                                                               | Default     |
+| ----------------- | ---------------------------------------------------------------------------------- | ----------- |
+| [items](#items)   | ArrayLike&lt;unknown&gt;                                                           | [] as any   |
+| [fields](#fields) | readonly string[] \| readonly Field&lt;string, unknown&gt;[]                       | undefined   |
+| [sort](#sort)     | Record&lt;string, 0 \| 1 \| -1&gt; \| Record&lt;string \| number, 0 \| 1 \| -1&gt; | ({}) as any |
 
 ### items
 
@@ -59,10 +58,6 @@ const fields = [
   },
 ];
 ```
-
-### allowOverflow
-
-Setting this to `true` allows the table to overflow horizontally when there's no room to show all columns. Defaults to `true`
 
 ### sort
 

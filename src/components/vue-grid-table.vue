@@ -1,11 +1,8 @@
 <template>
   <ol
-    class="grid-table"
+    class="vue-grid-table"
     role="table"
     aria-rowcount="-1"
-    :class="{
-      'md:overflow-x-auto': allowOverflow,
-    }"
     :style="{
       '--tb-tp': gridColumnTemplate,
     }"
@@ -13,7 +10,7 @@
     <slot name="top"></slot>
     <!-- table header -->
     <slot name="thead" :fields="(fields as T)">
-      <li role="row">
+      <li role="row" data-thead>
         <div
           v-for="(structureFields, index) in stackingStructure.fields"
           :key="'h-' + index"
@@ -29,6 +26,7 @@
             v-for="(field, i) in structureFields"
             :key="'hf-' + i"
             role="columnheader"
+            scope="col"
             :aria-sort="getSortAria(getFieldSort(field.key))"
           >
             <slot name="head()" :field="field" :sort="getFieldSort(field.key)">
@@ -240,8 +238,6 @@ const props = withDefaults(
      * ```
      */
     fields?: T;
-    /** Setting this to `true` allows the table to overflow horizontally when there's no room to show all columns. Defaults to `true` */
-    allowOverflow?: boolean;
     /**
      * sets `aria-sort` of table header cell to `ascending`, `descending` or `none` based on given values of `1`, `-1` and `0`. Example:
      *
@@ -259,7 +255,6 @@ const props = withDefaults(
     items: [] as any,
     fields: undefined,
     sort: () => ({}) as any,
-    allowOverflow: true,
   },
 );
 
@@ -425,62 +420,8 @@ function getSortAria(sort: 1 | -1 | 0) {
 </script>
 
 <style lang="css" scoped>
-.grid-table {
-  @apply grid w-full grid-cols-[1fr] gap-3 md:gap-0;
-}
-@media screen and (max-width: 767.777px) {
-  /* Don't display the header on small screens*/
-  .grid-table [role='row']:first-of-type {
-    @apply hidden;
-  }
-  .grid-table [role='row'] {
-    @apply bg-gray-600/20;
-  }
-
-  .grid-table [role='cell'],
-  .grid-table [role='columnheader'] {
-    @apply flex flex-wrap items-center justify-between;
-  }
-  .grid-table [role='cell'],
-  .grid-table [role='columnheader'] {
-    @apply text-end;
-  }
-  .grid-table [role='cell'] > *,
-  .grid-table [role='columnheader'] > * {
-    @apply mx-0;
-  }
-  .grid-table [role='cell']::before,
-  .grid-table [role='columnheader']::before {
-    content: attr(data-name) ':';
-    @apply text-start;
-  }
-}
-@media screen and (min-width: 768px) {
-  .grid-table [role='row'] {
-    grid-template-columns: var(--tb-tp);
-    @apply grid items-center;
-  }
-  .grid-table [role='row']:nth-child(odd) {
-    @apply bg-gray-600/20;
-  }
-  .grid-table [data-group] {
-    grid-template-columns: var(--cg-tp);
-    @apply grid;
-  }
-  .grid-table [role='cell'],
-  .grid-table [role='columnheader'] {
-    text-align: center;
-    @apply flex items-center justify-center;
-  }
-}
-.grid-table [role='row'] {
-  @apply m-0 list-none rounded-e-md rounded-s-md p-0;
-}
-.grid-table [role='cell'],
-.grid-table [role='columnheader'] {
-  @apply p-3;
-}
-.grid-table [role='columnheader'] {
-  @apply overflow-hidden overflow-ellipsis whitespace-nowrap md:overflow-visible;
+.vue-grid-table {
+  display: grid;
+  grid-template-columns: 1fr;
 }
 </style>
