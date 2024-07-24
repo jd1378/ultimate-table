@@ -4,7 +4,7 @@ import { getRequires } from './getRequires'
 
 let importMarker = 0
 
-const componentDirectories = readdirSync(resolve(__dirname, '../../src/components'))
+const componentStats = readdirSync(resolve(__dirname, '../../src/components'))
 
 function addVueLive(md: any) {
   const fence = md.renderer.rules.fence
@@ -31,7 +31,7 @@ function addVueLive(md: any) {
     const requires = getRequires(
       code,
       importMarker,
-      componentDirectories,
+      componentStats,
       env.relativePath,
       isProduction
     )
