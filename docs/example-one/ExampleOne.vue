@@ -1,17 +1,5 @@
 <template>
-  <VueGridTable
-    class="vue-grid-table"
-    :items="users"
-    :fields="fields"
-    :sort="{ id: 1 }"
-  >
-    <template #cell(id)="{ item }">#{{ item.id }}</template>
-    <template #head()="{ field, sort }">
-      {{ field.label }}
-      <button v-if="sort" type="button" class="sort-btn">
-        {{ sort === 1 ? '↑' : '↓' }}
-      </button>
-    </template>
+  <VueGridTable class="vue-grid-table" :items="users" :fields="fields">
   </VueGridTable>
 </template>
 
@@ -19,7 +7,7 @@
 import { VueGridTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils.ts';
-import '@/styles/basic.borderless.css';
+import '@/styles/basic.bordered.css';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en', {
   day: 'numeric',
@@ -66,16 +54,4 @@ const fields: FieldsFromType<User> = [
   },
 ] as const;
 </script>
-
-<style>
-.sort-btn {
-  margin-inline-start: 0.25rem;
-  border-radius: 0.25rem;
-  padding-left: 0.125rem;
-  padding-right: 0.125rem;
-}
-.sort-btn:hover {
-  background-color: rgb(255 255 255 / 0.1);
-}
-</style>
  
