@@ -25,8 +25,12 @@ export default defineConfig({
         link: '/getting-started',
       },
       {  
-        text: 'Example',
+        text: 'Example 1',
         link: '/example-one/',
+      },
+      {  
+        text: 'Example 2',
+        link: '/example-two/',
       },
       {
         text: 'Components',
