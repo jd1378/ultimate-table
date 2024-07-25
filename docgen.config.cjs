@@ -14,7 +14,7 @@ const tsconfigPath = path.resolve(__dirname, './tsconfig.json');
 const checker = createComponentMetaChecker(tsconfigPath);
 
 module.exports = defineConfig({
-  docsRepo: 'jd1378/vue-responsive-table',
+  docsRepo: 'jd1378/ultimate-table',
   docsBranch: 'main',
   docsFolder: 'guide',
   componentsRoot: './src/components',

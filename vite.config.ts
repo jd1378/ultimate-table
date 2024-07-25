@@ -37,7 +37,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: 'src/entry.ts',
-      name: 'VueResponsiveTable',
+      name: 'UltimateTable',
       formats: ['es', 'cjs', 'umd'],
       fileName(format) {
         let extension = 'js';
@@ -48,7 +48,7 @@ export default defineConfig({
         } else if (format === 'umd') {
           extension = 'umd.c' + extension;
         }
-        return `vue-responsive-table.${extension}`;
+        return `ultimate-table.${extension}`;
       },
     },
     rollupOptions: {
@@ -58,7 +58,7 @@ export default defineConfig({
       external: ['vue'],
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'main.css') return 'vue-responsive-table.css';
+          if (assetInfo.name === 'main.css') return 'ultimate-table.css';
           return assetInfo.name as string;
         },
         exports: 'named',

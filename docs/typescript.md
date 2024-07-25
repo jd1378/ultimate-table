@@ -5,10 +5,10 @@ Example:
 
 ```vue
 <template>
-  <VueResponsiveTable :items="users" :fields="fields">
+  <UltimateTable :items="users" :fields="fields">
     <!-- `#cell(id)` will be suggested and `item` will be of type `User` -->
     <template #cell(id)="{ item }">#{{ item.id }}</template> 
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 
 <script lang="ts" setup>

@@ -12,4 +12,4 @@ import ExampleThree from "./ExampleThree.vue";
 </script>
 ```
 
-Source for Example 3 is found here: <https://github.com/jd1378/vue-responsive-table/tree/main/docs/example-three/ExampleThree.vue>
+Source for Example 3 is found here: <https://github.com/jd1378/ultimate-table/tree/main/docs/example-three/ExampleThree.vue>

@@ -10,25 +10,25 @@ To use base style with each of the variants you can import them:
 
 ```ts
 // base styles:
-import "vue-responsive-table/styles/basic.css"; // uses media queries         | class name: vue-responsive-table
-import "vue-responsive-table/styles/container.css"; // uses container queries | class name: vue-responsive-table--container
+import "ultimate-table/styles/basic.css"; // uses media queries         | class name: ultimate-table
+import "ultimate-table/styles/container.css"; // uses container queries | class name: ultimate-table--container
 
 // basic variants:
-import "vue-responsive-table/styles/basic.bordered.css";   // class name: vue-responsive-table--bordered
-import "vue-responsive-table/styles/basic.borderless.css"; // class name: vue-responsive-table--borderless
+import "ultimate-table/styles/basic.bordered.css";   // class name: ultimate-table--bordered
+import "ultimate-table/styles/basic.borderless.css"; // class name: ultimate-table--borderless
 
 // container variants:
-import "vue-responsive-table/styles/container.bordered.css";   // class name: vue-responsive-table--container--bordered
-import "vue-responsive-table/styles/container.borderless.css"; // class name: vue-responsive-table--container--borderless
+import "ultimate-table/styles/container.bordered.css";   // class name: ultimate-table--container--bordered
+import "ultimate-table/styles/container.borderless.css"; // class name: ultimate-table--container--borderless
 ```
 
 Then you must add the class names from the imported styles:
 
 ```vue
 <template>
-  <VueResponsiveTable class="<class names from above>">
+  <UltimateTable class="<class names from above>">
     <!-- ... -->
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 ```
 
@@ -36,9 +36,9 @@ Example:
 
 ```vue
 <template>
-  <VueResponsiveTable class="vue-responsive-table--container vue-responsive-table--container--bordered">
+  <UltimateTable class="ultimate-table--container ultimate-table--container--bordered">
     <!-- ... -->
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 ```
 
@@ -46,12 +46,12 @@ Example 2:
 
 ```vue
 <template>
-  <VueResponsiveTable class="vue-responsive-table vue-responsive-table--bordered">
+  <UltimateTable class="ultimate-table ultimate-table--bordered">
     <!-- ... -->
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 ```
 
 You can find the source for these files here:
 
-<https://github.com/jd1378/vue-responsive-table/tree/main/src/styles>
+<https://github.com/jd1378/ultimate-table/tree/main/src/styles>

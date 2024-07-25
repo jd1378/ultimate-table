@@ -1,4 +1,4 @@
-# vue-responsive-table
+# ultimate-table
 
 ## Props
 

@@ -1,21 +1,21 @@
 {
-  "name": "vue-responsive-table",
+  "name": "ultimate-table",
   "version": "1.0.0",
-  "description": "a responsive column-stackable type-safe table that is made from grid",
+  "description": "a responsive column-stackable type-safe table that is made from grid for vue 3",
   "author": "jd1378",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue-responsive-table.umd.js",
-  "module": "dist/vue-responsive-table.es.mjs",
+  "main": "dist/ultimate-table.umd.js",
+  "module": "dist/ultimate-table.es.mjs",
   "types": "./dist/entry.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-responsive-table.mjs",
-      "require": "./dist/vue-responsive-table.umd.cjs",
+      "import": "./dist/ultimate-table.mjs",
+      "require": "./dist/ultimate-table.umd.cjs",
       "types": "./dist/entry.d.ts"
     },
     "./cjs": {
-      "default": "./dist/vue-responsive-table.cjs",
+      "default": "./dist/ultimate-table.cjs",
       "types": "./dist/entry.d.ts"
     },
     "./styles": {
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jd1378/vue-responsive-table.git"
+    "url": "git@github.com:jd1378/ultimate-table.git"
   },
   "devDependencies": {
     "@types/node": "^20.14.12",

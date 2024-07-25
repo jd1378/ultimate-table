@@ -7,29 +7,29 @@
 ## Install
 
 ```bash
-npm install --save-dev vue-responsive-table
+npm install --save-dev ultimate-table
 # or 
-yarn add -D vue-responsive-table
+yarn add -D ultimate-table
 # or 
-pnpm add -D vue-responsive-table
+pnpm add -D ultimate-table
 ```
 
 ## Load Component
 
 ```js static noeditor
 // add it to your vue application:
-import VueResponsiveTable from 'vue-responsive-table';
+import UltimateTable from 'ultimate-table';
 import Vue from 'vue';
 
-Vue.component('VueResponsiveTable', VueResponsiveTable);
+Vue.component('UltimateTable', UltimateTable);
 
 // or
 
-import {VueResponsiveTable} from 'vue-responsive-table';
+import {UltimateTable} from 'ultimate-table';
 
 export default {
   components: {
-    VueResponsiveTable,
+    UltimateTable,
   },
 };
 ```
@@ -38,8 +38,8 @@ export default {
 
 ```vue
 <template>
-  <VueResponsiveTable :items="items">
+  <UltimateTable :items="items">
     <!-- ... -->
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 ```

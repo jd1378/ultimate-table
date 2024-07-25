@@ -1,14 +1,14 @@
 <template>
-  <VueResponsiveTable
-    class="vue-responsive-table--container vue-responsive-table--container--bordered"
+  <UltimateTable
+    class="ultimate-table--container ultimate-table--container--bordered"
     :items="users"
     :fields="fields"
   >
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 
 <script lang="ts" setup>
-import { VueResponsiveTable } from '@/entry';
+import { UltimateTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils.ts';
 import '@/styles/container.css';

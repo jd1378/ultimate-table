@@ -20,7 +20,7 @@ defineSlots<
     [C in `cell(${string})`]: (props: {item: YourUserApiResponse}) => any;
   } & {
     empty(): any;
-    // any other slot type you want to expose from vue-responsive-table
+    // any other slot type you want to expose from ultimate-table
     // or new slots of your own.
   }
 >();
@@ -34,12 +34,12 @@ defineProps<{
 </script>
 
 <template>
-  <vue-responsive-table>
+  <ultimate-table>
     <!-- @vue-skip -->
     <template v-for="(_, slot) in $slots" #[slot]="scope">
       <slot :name="slot" v-bind="scope" />
     </template>
-  </vue-responsive-table>
+  </ultimate-table>
 </template>
 ```
 
@@ -51,7 +51,7 @@ The following example is a specific real world application of the generic types 
 <script lang="ts">
 import type {ServiceTypes} from 'your-feathers-api';
 
-import type {Field} from 'vue-responsive-table';
+import type {Field} from 'ultimate-table';
 
 type ServiceNamesWithFind<T> = {
   [K in keyof T]: T[K] extends {
@@ -116,8 +116,8 @@ const result = api
 </script>
 
 <template>
-  <vue-responsive-table :items="result.data" :fields="fields">
+  <ultimate-table :items="result.data" :fields="fields">
     <!-- your design -->
-  </vue-responsive-table>
+  </ultimate-table>
 </template>
 ```

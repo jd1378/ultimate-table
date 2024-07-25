@@ -3,7 +3,7 @@
 Editable example of bordered style of the table:
 
 <style>
-.vue-responsive-table--custom {
+.ultimate-table--custom {
   container: grid-table / inline-size;
 }
 
@@ -11,18 +11,18 @@ Editable example of bordered style of the table:
 @container grid-table (max-width: 539.77px) {
 
   /* puts some space between the cards */
-  .vue-responsive-table--custom > ol {
+  .ultimate-table--custom > ol {
     gap: 0.75rem;
   }
 
   /* Don't display the header on small screens*/
-  .vue-responsive-table--custom [role='row']:first-of-type {
+  .ultimate-table--custom [role='row']:first-of-type {
     display: none;
   }
 
   /* cell content alignment */
-  .vue-responsive-table--custom [role='cell'],
-  .vue-responsive-table--custom [role='columnheader'] {
+  .ultimate-table--custom [role='cell'],
+  .ultimate-table--custom [role='columnheader'] {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -31,26 +31,26 @@ Editable example of bordered style of the table:
   }
 
   /* - */
-  .vue-responsive-table--custom [role='cell'] > *,
-  .vue-responsive-table--custom [role='columnheader'] > * {
+  .ultimate-table--custom [role='cell'] > *,
+  .ultimate-table--custom [role='columnheader'] > * {
     margin-left: 0px;
     margin-right: 0px;
   }
 
   /* label of the cell */
-  .vue-responsive-table--custom [role='cell']::before,
-  .vue-responsive-table--custom [role='columnheader']::before {
+  .ultimate-table--custom [role='cell']::before,
+  .ultimate-table--custom [role='columnheader']::before {
     content: attr(data-label) ':';
     text-align: start;
   }
 
   /* styling preference */
-  .vue-responsive-table--custom [role='row'] {
+  .ultimate-table--custom [role='row'] {
     background-color:  rgb(75 85 99 / 0.2);
   }
 
   /* styling preference */
-  .vue-responsive-table--custom [role='row'] {
+  .ultimate-table--custom [role='row'] {
     border: 1px solid gray;
     border-right: none;
     border-bottom: none;
@@ -61,30 +61,30 @@ Editable example of bordered style of the table:
 @container grid-table (min-width: 540px) {
 
   /* most important part for table (part 1) */
-  .vue-responsive-table--custom [role='row'] {
+  .ultimate-table--custom [role='row'] {
     grid-template-columns: var(--tb-tp);
     display: grid;
     align-items: stretch;
   }
   
   /* most important part for table (part 2) */
-  .vue-responsive-table--custom [data-group] {
+  .ultimate-table--custom [data-group] {
     grid-template-columns: var(--cg-tp);
     display: grid;
   }
 
   /* allows table to show horizontal scroll when theres not enough space  */
-  .vue-responsive-table--custom {
+  .ultimate-table--custom {
     overflow-x: auto;
   }
   /* same as above  */
-  .vue-responsive-table--custom [role='columnheader'] {
+  .ultimate-table--custom [role='columnheader'] {
     overflow: visible;
   }
 
   /* cell content alignment */
-  .vue-responsive-table--custom [role='cell'],
-  .vue-responsive-table--custom [role='columnheader'] {
+  .ultimate-table--custom [role='cell'],
+  .ultimate-table--custom [role='columnheader'] {
     text-align: center;
     display: flex;
     align-items: center;
@@ -95,37 +95,37 @@ Editable example of bordered style of the table:
   }
 
   /* styling preference */
-  .vue-responsive-table--custom [role='row']:nth-child(odd) {
+  .ultimate-table--custom [role='row']:nth-child(odd) {
     background-color: rgb(75 85 99 / 0.2);
   }
 
   /* styling preference */
-  .vue-responsive-table--custom [role='row'][data-thead] {
+  .ultimate-table--custom [role='row'][data-thead] {
     background-color: rgb(156 163 175 / 0.2);
   }
 
   /* styling preference */
-  .vue-responsive-table--custom > ol {
+  .ultimate-table--custom > ol {
     border: 1px solid gray;
     border-right: none;
     border-bottom: none;
   }
 }
 
-.vue-responsive-table--custom li[role='row'] {
+.ultimate-table--custom li[role='row'] {
   margin: 0px;
   padding: 0px;
   /* list style type is very important since we are using `li` elements in grid */
   list-style-type: none;
 }
 
-.vue-responsive-table--custom > ol {
+.ultimate-table--custom > ol {
   margin: 0;
   list-style: none !important;
 }
 
-.vue-responsive-table--custom [role='cell'],
-.vue-responsive-table--custom [role='columnheader'] {
+.ultimate-table--custom [role='cell'],
+.ultimate-table--custom [role='columnheader'] {
   padding: 0.65rem;
   /* styling preference: */
   border: 1px solid gray;
@@ -137,12 +137,12 @@ Editable example of bordered style of the table:
 
 ```vue live resizable
 <template>
-  <vue-responsive-table
-    class="vue-responsive-table--custom"
+  <ultimate-table
+    class="ultimate-table--custom"
     :items="users"
     :fields="fields"
   >
-  </vue-responsive-table>
+  </ultimate-table>
 </template>
 
 <script lang="ts" setup>

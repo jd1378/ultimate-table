@@ -1,6 +1,6 @@
 <template>
-  <VueResponsiveTable
-    class="vue-responsive-table vue-responsive-table--borderless"
+  <UltimateTable
+    class="ultimate-table ultimate-table--borderless"
     :items="users"
     :fields="fields"
     :sort="{ id: 1 }"
@@ -14,11 +14,11 @@
         </button>
       </div>
     </template>
-  </VueResponsiveTable>
+  </UltimateTable>
 </template>
 
 <script lang="ts" setup>
-import { VueResponsiveTable } from '@/entry';
+import { UltimateTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils';
 import '@/styles/basic.css';

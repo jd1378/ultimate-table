@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 vite.config.ts.*
-vue-responsive-table*.tgz
+ultimate-table*.tgz

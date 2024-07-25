@@ -12,4 +12,4 @@ import ExampleOne from "./ExampleOne.vue";
 </script>
 ```
 
-Source for Example 1 is found here: <https://github.com/jd1378/vue-responsive-table/tree/main/docs/example-one/ExampleOne.vue>
+Source for Example 1 is found here: <https://github.com/jd1378/ultimate-table/tree/main/docs/example-one/ExampleOne.vue>
