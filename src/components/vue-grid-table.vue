@@ -130,10 +130,8 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 /*
  * The table grid overview
  *
- * think of `role="rowgroup"` as `<thead/>`, `<tbody/>`, `<tfoot>`
- * each rowgroup, can have many rows
  * each row is shown by a `<li/>` element
- * each row contains cells and cell groups
+ * each row contains cell groups
  * cell groups contains cells that each are shown in their own columns when there's space,
  *    but once there's no more space, they merge the other cells in the group in one column
  *    to allow for smaller screens to show the same amount of data
