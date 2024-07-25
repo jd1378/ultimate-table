@@ -137,6 +137,8 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
  * cell groups contains cells that each are shown in their own columns when there's space,
  *    but once there's no more space, they merge the other cells in the group in one column
  *    to allow for smaller screens to show the same amount of data
+ *
+ * the extra div wrapper around the component is there to make the container query styling possible
  */
 
 type FT = U[K extends keyof U ? K : never] | unknown;
