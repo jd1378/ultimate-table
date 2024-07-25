@@ -1,7 +1,7 @@
 /* all rules are important except those commented with `styling preference`  */
 
 /* card style */
-@media (max-width: 540px) { 
+@media (max-width: 539.77) { 
 
   /* puts some space between the cards */
   .vue-grid-table > ol { 

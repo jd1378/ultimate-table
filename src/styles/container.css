@@ -5,7 +5,7 @@
 }
 
 /* card style */
-@container grid-table (max-width: 540px) { 
+@container grid-table (max-width: 539.77px) { 
 
   /* puts some space between the cards */
   .vue-grid-table--container > ol { 

@@ -1,5 +1,5 @@
 /* card style */
-@container grid-table (max-width: 540px) { 
+@container grid-table (max-width: 539.77px) { 
   .vue-grid-table--container--bordered [role='row'] {
     background-color:  rgb(75 85 99 / 0.2);
   }
