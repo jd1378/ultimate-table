@@ -39,9 +39,9 @@ export function generateUsers(length: number = 7) {
       email:
         generateWord(3 + Math.floor(Math.random() * 7)) +
         '@' +
-        generateWord(3 + Math.floor(Math.random() * 5)) +
+        generateWord(3 + Math.floor(Math.random() * 2)) +
         '.' +
-        generateWord(3 + Math.floor(Math.random() * 5)),
+        generateWord(3 + Math.floor(Math.random() * 2)),
       memberSince: new Date(
         Date.now() - Math.floor(Math.random() * 100000000000),
       ),

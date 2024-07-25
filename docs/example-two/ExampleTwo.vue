@@ -51,13 +51,13 @@ const fields: FieldsFromType<User> = [
   {
     key: 'email',
     label: 'Email',
-    size: 20,
+    size: 21,
     group: '1',
   },
   {
     key: 'memberSince',
     label: 'Member Since',
-    size: 20,
+    size: 15,
     formatter: (value: any) => {
       return dateTimeFormatter.format(value);
     },

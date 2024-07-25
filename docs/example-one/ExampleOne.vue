@@ -41,7 +41,7 @@ const fields: FieldsFromType<User> = [
   {
     key: 'email',
     label: 'Email',
-    size: 15,
+    size: 21,
     group: '2',
   },
   {
