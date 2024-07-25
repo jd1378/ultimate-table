@@ -9,7 +9,7 @@
         '--tb-tp': gridColumnTemplate,
       }"
     >
-      <slot name="top"></slot>
+      <slot name="top" :fields="(fields as T)"></slot>
       <!-- table header -->
       <slot name="thead" :fields="(fields as T)">
         <li role="row" data-thead>
@@ -90,8 +90,7 @@
           <span>No Data</span>
         </div>
       </slot>
-      <slot name="tfoot" :fields="(fields as T)"></slot>
-      <slot name="bottom"></slot>
+      <slot name="bottom" :fields="(fields as T)"></slot>
     </ol>
   </div>
 </template>
@@ -183,14 +182,12 @@ defineSlots<
     thead(props: { fields: T }): any;
     /** replaces table rows if used. */
     tbody(props: { items: I; fields: T }): any;
-    /** rendered after the tbody slot. */
-    tfoot(props: { fields: T }): any;
     /** is rendered when there's no `items` to render. */
     empty(): any;
-    /** is rendered as a whole row at the top of the table. */
-    top(): any;
-    /** is rendered as a whole row at the bottom of the table. */
-    bottom(): any;
+    /** is rendered as a whole row at the top of table. */
+    top(props: { fields: T }): any;
+    /** is rendered as a whole row at the bottom of table. */
+    bottom(props: { fields: T }): any;
   }
 >();
 
