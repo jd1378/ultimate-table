@@ -1,7 +1,7 @@
 /* all rules are important except those commented with `styling preference`  */
 
 /* card style */
-@media (max-width: 768px) { 
+@media (max-width: 540px) { 
 
   /* puts some space between the field label and the value in card display */
   .vue-grid-table { 
@@ -39,7 +39,7 @@
 }
 
 /* normal style */
-@media (min-width: 768px) {
+@media (min-width: 540px) {
 
   /* most important part for table (part 1) */
   .vue-grid-table [role='row'] {

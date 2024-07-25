@@ -1,12 +1,12 @@
 /* card style */
-@media (max-width: 768px) { 
+@media (max-width: 540px) { 
   .vue-grid-table.bordered [role='row'] {
     background-color:  rgb(75 85 99 / 0.2);
   }
 }
 
 /* normal style */
-@media (min-width: 768px) {
+@media (min-width: 540px) {
   .vue-grid-table.bordered [role='row']:nth-child(odd) {
     background-color: rgb(75 85 99 / 0.2);
   }
