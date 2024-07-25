@@ -20,7 +20,7 @@ const items = [
 ];
 ```
 
-`<GridTable>` automatically samples the first row to extract field names (the keys in the record data). Field names are automatically "humanized" by converting snake_case and camelCase to individual words and capitalizes each word. Example conversions:
+`<UltimateTable>` automatically samples the first row to extract field names (the keys in the record data). Field names are automatically "humanized" by converting snake_case and camelCase to individual words and capitalizes each word. Example conversions:
 
 - `first_name` becomes `First Name`
 - `last-name` becomes `Last Name`
