@@ -91,7 +91,11 @@
   margin: 0px;
   padding: 0px;
   /* list style type is very important since we are using `li` elements in grid */
-  list-style-type: none; 
+  list-style-type: none !important; 
+}
+ol.vue-grid-table {
+  margin-top: 0;
+  list-style: none !important;
 }
 
 .vue-grid-table [role='cell'],
