@@ -40,6 +40,10 @@ export default defineConfig({
         text: 'Example 2',
         link: '/example-two/',
       },
+      {  
+        text: 'Example 3 (container)',
+        link: '/example-three/',
+      },
       {
         text: 'Components',
         items: sidebarComponents.map(comp => {
