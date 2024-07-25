@@ -19,7 +19,7 @@ const users: User[] = generateUsers(5);
 const fields: FieldsFromType<User> = [
   {
     key: 'id',
-    size: 3,
+    size: 4,
   },
   {
     key: 'firstName',
@@ -36,7 +36,7 @@ const fields: FieldsFromType<User> = [
   {
     key: 'email',
     label: 'Email',
-    size: 20,
+    size: 15,
   },
   {
     key: 'memberSince',
@@ -49,7 +49,7 @@ const fields: FieldsFromType<User> = [
   {
     key: 'role',
     label: 'Role',
-    size: 6,
+    size: 8,
   },
 ] as const;
 </script>

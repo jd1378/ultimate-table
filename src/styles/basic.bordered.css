@@ -73,7 +73,10 @@
     text-align: center;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
+    width: 100%;
+    min-width: 0px;
+    overflow-wrap: anywhere;
   }
 
   /* styling preference */
@@ -100,13 +103,7 @@ ol.vue-grid-table {
 
 .vue-grid-table [role='cell'],
 .vue-grid-table [role='columnheader'] {
-  padding: 0.75rem;
-}
-
-.vue-grid-table [role='columnheader'] {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  padding: 0.65rem;
 }
 
 /* styling preference */

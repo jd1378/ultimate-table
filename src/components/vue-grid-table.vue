@@ -381,12 +381,8 @@ const stackingStructure = computed(() => {
 const gridColumnTemplate = computed(() => {
   const def = stackingStructure.value.sizes
     .map(
-      (s, i) =>
-        `minmax(min(${Array.isArray(s) ? Math.max(...s) : s}ch, ${
-          (stackingStructure.value.normalizedSizes[i] /
-            stackingStructure.value.sizeSum) *
-          100
-        }%), ${Array.isArray(s) ? s.length : 1}fr)`,
+      (s) =>
+        `minmax(${Array.isArray(s) ? Math.max(...s) : s}ch, ${Array.isArray(s) ? s.length : 1}fr)`,
     )
     .join(' ');
   return def;
