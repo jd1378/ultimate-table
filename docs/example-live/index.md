@@ -154,8 +154,8 @@ const dateTimeFormatter = new Intl.DateTimeFormat('en', {
   year: 'numeric',
 });
 
-const users: User[] = generateUsers(5);
-const fields: FieldsFromType<User> = [
+const users = generateUsers(5);
+const fields = [
   {
     key: 'id',
     size: 4,
