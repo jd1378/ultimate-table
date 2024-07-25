@@ -24,13 +24,9 @@ defineProps({
   padding: 0;
 }
 .preview-code {
-  display: flex;
-  flex-flow: column wrap; 
   border: 1px solid #888888;
 }
 .vp-doc .preview-code .block {
-  flex-grow: 1;
-  width: 100%; 
   margin:0;
   min-height: 300px;
 }
@@ -41,8 +37,7 @@ defineProps({
   height: 100%; 
   white-space: pre-wrap;
 }
-.preview-code .preview { 
-  text-align: center;
+.preview-code .preview {
   box-sizing: border-box;
   padding: 12px;
 }
