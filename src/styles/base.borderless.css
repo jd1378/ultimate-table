@@ -1,21 +1,21 @@
 /* card style */
 @media (max-width: 540px) { 
-  .vue-grid-table.borderless  [role='row'] {
+  .vue-grid-table--borderless  [role='row'] {
     background-color:  rgb(75 85 99 / 0.2);
   }
 }
 /* normal style */
 @media (min-width: 540px) {
-  .vue-grid-table.borderless [role='row']:nth-child(odd) {
+  .vue-grid-table--borderless [role='row']:nth-child(odd) {
     background-color: rgb(75 85 99 / 0.2);
   }
 
-  .vue-grid-table.borderless [role='row'][data-thead] {
+  .vue-grid-table--borderless [role='row'][data-thead] {
     background-color: rgb(156 163 175 / 0.2);
   }
 }
 
-.vue-grid-table.borderless [role='row'] {
+.vue-grid-table--borderless [role='row'] {
   border-start-end-radius: 0.375rem;
   border-end-end-radius: 0.375rem;
   border-start-start-radius: 0.375rem;

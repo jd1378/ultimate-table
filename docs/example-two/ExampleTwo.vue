@@ -1,6 +1,6 @@
 <template>
   <VueGridTable
-    class="vue-grid-table borderless"
+    class="vue-grid-table vue-grid-table--borderless"
     :items="users"
     :fields="fields"
     :sort="{ id: 1 }"
@@ -22,7 +22,7 @@ import { VueGridTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils';
 import '@/styles/base.css';
-import '@/styles/basic.borderless.css';
+import '@/styles/base.borderless.css';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en', {
   day: 'numeric',

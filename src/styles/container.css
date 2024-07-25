@@ -1,21 +1,25 @@
 /* all rules are important except those commented with `styling preference`  */
 
+.vue-grid-table--container {
+  container: grid-table / inline-size;
+}
+
 /* card style */
-@media (max-width: 540px) { 
+@container grid-table (max-width: 540px) { 
 
   /* puts some space between the cards */
-  .vue-grid-table > ol { 
+  .vue-grid-table--container > ol { 
     gap: 0.75rem;
   }
 
   /* Don't display the header on small screens*/
-  .vue-grid-table [role='row']:first-of-type {
+  .vue-grid-table--container [role='row']:first-of-type {
     display: none;
   }
 
   /* cell content alignment */
-  .vue-grid-table [role='cell'],
-  .vue-grid-table [role='columnheader'] {
+  .vue-grid-table--container [role='cell'],
+  .vue-grid-table--container [role='columnheader'] {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -24,48 +28,48 @@
   } 
 
   /* - */
-  .vue-grid-table [role='cell'] > *,
-  .vue-grid-table [role='columnheader'] > * {
+  .vue-grid-table--container [role='cell'] > *,
+  .vue-grid-table--container [role='columnheader'] > * {
     margin-left: 0px;
     margin-right: 0px;
   }
 
   /* label of the cell */
-  .vue-grid-table [role='cell']::before,
-  .vue-grid-table [role='columnheader']::before {
+  .vue-grid-table--container [role='cell']::before,
+  .vue-grid-table--container [role='columnheader']::before {
     content: attr(data-label) ':';
     text-align: start; 
   }
 }
 
 /* normal style */
-@media (min-width: 540px) {
+@container grid-table (min-width: 540px) {
 
   /* most important part for table (part 1) */
-  .vue-grid-table [role='row'] {
+  .vue-grid-table--container [role='row'] {
     grid-template-columns: var(--tb-tp);
     display: grid;
     align-items: stretch;
   }
   
   /* most important part for table (part 2) */
-  .vue-grid-table [data-group] {
+  .vue-grid-table--container [data-group] {
     grid-template-columns: var(--cg-tp);
     display: grid;
   }
 
   /* allows table to show horizontal scroll when theres not enough space  */
-  .vue-grid-table {
+  .vue-grid-table--container {
     overflow-x: auto;
   }
   /* same as above  */
-  .vue-grid-table [role='columnheader'] {
+  .vue-grid-table--container [role='columnheader'] {
     overflow: visible; 
   }
 
   /* cell content alignment */
-  .vue-grid-table [role='cell'],
-  .vue-grid-table [role='columnheader'] {
+  .vue-grid-table--container [role='cell'],
+  .vue-grid-table--container [role='columnheader'] {
     text-align: center;
     display: flex;
     align-items: center;
@@ -77,18 +81,19 @@
 
 }
 
-.vue-grid-table li[role='row'] {
+.vue-grid-table--container li[role='row'] {
   margin: 0px;
   padding: 0px;
   /* list style type is very important since we are using `li` elements in grid */
-  list-style-type: none !important; 
+  list-style-type: none; 
 }
-.vue-grid-table ol {
+
+.vue-grid-table--container > ol {
   margin: 0;
   list-style: none !important;
 }
 
-.vue-grid-table [role='cell'],
-.vue-grid-table [role='columnheader'] {
+.vue-grid-table--container [role='cell'],
+.vue-grid-table--container [role='columnheader'] {
   padding: 0.65rem;
 }

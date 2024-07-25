@@ -1,94 +1,99 @@
 <template>
-  <ol
-    class="vue-grid-table"
-    role="table"
-    aria-rowcount="-1"
-    :style="{
-      display: 'grid',
-      'grid-template-columns': '1fr',
-      '--tb-tp': gridColumnTemplate,
-    }"
-  >
-    <slot name="top"></slot>
-    <!-- table header -->
-    <slot name="thead" :fields="(fields as T)">
-      <li role="row" data-thead>
-        <div
-          v-for="(structureFields, index) in stackingStructure.fields"
-          :key="'h-' + index"
-          :data-group="structureFields.length > 1"
-          :style="{
+  <div>
+    <ol
+      role="table"
+      aria-rowcount="-1"
+      :style="{
+        display: 'grid',
+        'grid-template-columns': '1fr',
+        '--tb-tp': gridColumnTemplate,
+      }"
+    >
+      <slot name="top"></slot>
+      <!-- table header -->
+      <slot name="thead" :fields="(fields as T)">
+        <li role="row" data-thead>
+          <div
+            v-for="(structureFields, index) in stackingStructure.fields"
+            :key="'h-' + index"
+            :data-group="structureFields.length > 1"
+            :style="{
             '--cg-tp':
               structureFields.length > 1
                 ? groupGridTemplates[structureFields[0].group!]
                 : undefined,
           }"
-        >
-          <div
-            v-for="(field, i) in structureFields"
-            :key="'hf-' + i"
-            role="columnheader"
-            scope="col"
-            :aria-sort="getSortAria(getFieldSort(field.key))"
           >
-            <slot name="head()" :field="field" :sort="getFieldSort(field.key)">
+            <div
+              v-for="(field, i) in structureFields"
+              :key="'hf-' + i"
+              role="columnheader"
+              scope="col"
+              :aria-sort="getSortAria(getFieldSort(field.key))"
+            >
               <slot
-                :name="`head(${field.key})`"
-                :item="field"
+                name="head()"
+                :field="field"
                 :sort="getFieldSort(field.key)"
               >
-                {{ field.label || field.key }}
+                <slot
+                  :name="`head(${field.key})`"
+                  :item="field"
+                  :sort="getFieldSort(field.key)"
+                >
+                  {{ field.label || field.key }}
+                </slot>
               </slot>
-            </slot>
+            </div>
           </div>
-        </div>
-      </li>
-    </slot>
-    <!-- table body -->
-    <slot
-      v-if="$slots['tbody']"
-      name="tbody"
-      :items="(items as I)"
-      :fields="fields"
-    ></slot>
-    <template v-else-if="(items as any)?.length">
-      <li
-        v-for="(item, i) in items as RowDataType[]"
-        :key="(item as any).id || 'r' + i"
-        role="row"
-      >
-        <div
-          v-for="(structureFields, index) in stackingStructure.fields"
-          :key="'header-' + index"
-          :data-group="structureFields.length > 1"
-          :style="{
+        </li>
+      </slot>
+      <!-- table body -->
+      <slot
+        v-if="$slots['tbody']"
+        name="tbody"
+        :items="(items as I)"
+        :fields="fields"
+      ></slot>
+      <template v-else-if="(items as any)?.length">
+        <li
+          v-for="(item, i) in items as RowDataType[]"
+          :key="(item as any).id || 'r' + i"
+          role="row"
+        >
+          <div
+            v-for="(structureFields, index) in stackingStructure.fields"
+            :key="'header-' + index"
+            :data-group="structureFields.length > 1"
+            :style="{
             '--cg-tp':
               structureFields.length > 1
                 ? groupGridTemplates[structureFields[0].group!]
                 : undefined,
           }"
-        >
-          <div
-            v-for="field in structureFields"
-            :key="field.key"
-            role="cell"
-            :data-label="field.label || field.key"
           >
-            <slot :name="`cell(${field.key})`" :item="item">
-              {{ getFieldContent(item, field) }}
-            </slot>
+            <div
+              v-for="field in structureFields"
+              :key="field.key"
+              role="cell"
+              :data-label="field.label || field.key"
+            >
+              <slot :name="`cell(${field.key})`" :item="item">
+                {{ getFieldContent(item, field) }}
+              </slot>
+            </div>
           </div>
+        </li>
+      </template>
+      <slot v-else name="empty">
+        <div class="grid-table">
+          <span>No Data</span>
         </div>
-      </li>
-    </template>
-    <slot v-else name="empty">
-      <div class="grid-table">
-        <span>No Data</span>
-      </div>
-    </slot>
-    <slot name="tfoot" :fields="(fields as T)"></slot>
-    <slot name="bottom"></slot>
-  </ol>
+      </slot>
+      <slot name="tfoot" :fields="(fields as T)"></slot>
+      <slot name="bottom"></slot>
+    </ol>
+  </div>
 </template>
 
 <script lang="ts">
