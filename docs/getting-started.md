@@ -1,5 +1,9 @@
 # Getting Started
 
+## Requirements
+
+- Minimum required `Vue` version is `3.3.0`
+
 ## Install
 
 ```bash
