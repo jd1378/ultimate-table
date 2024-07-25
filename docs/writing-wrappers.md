@@ -45,7 +45,7 @@ defineProps<{
 
 ## feathers-pinia typed client example
 
-The following example is a specific real world application of the generic types and how you can get end-to-end type safety and slot completion down to your table component. it has been simplified to help you get started on your own component. it assumes you have a feathers backend with [typed client](https://feathersjs.com/guides/cli/client) and [feathers-pinia](https://feathers-pinia.pages.dev/) setup on your frontend. the result is that you get autocomplete for your `service` names on your table component and it's scoped slots:
+The following example is a specific real world application of the generic types and how you can get end-to-end type safety and slot completion down to your table component. it has been simplified to help you get started on your own component. it assumes you have a feathers backend with [typed client](https://feathersjs.com/guides/cli/client) and [feathers-pinia](https://feathers-pinia.pages.dev/) setup on your frontend. the result is that you get types for your `service` names on your table component and it's scoped slots:
 
 ```vue
 <script lang="ts">
