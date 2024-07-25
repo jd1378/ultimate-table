@@ -1,14 +1,14 @@
 <template>
-  <VueGridTable
+  <VueResponsiveTable
     class="vue-responsive-table vue-responsive-table--bordered"
     :items="users"
     :fields="fields"
   >
-  </VueGridTable>
+  </VueResponsiveTable>
 </template>
 
 <script lang="ts" setup>
-import { VueGridTable } from '@/entry';
+import { VueResponsiveTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils.ts';
 import '@/styles/basic.css';

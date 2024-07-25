@@ -86,9 +86,7 @@
         </li>
       </template>
       <slot v-else name="empty">
-        <div class="grid-table">
-          <span>No Data</span>
-        </div>
+        <span>No Data</span>
       </slot>
       <slot name="bottom" :fields="(fields as T)"></slot>
     </ol>

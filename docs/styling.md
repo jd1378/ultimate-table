@@ -26,9 +26,9 @@ Then you must add the class names from the imported styles:
 
 ```vue
 <template>
-  <VueGridTable class="<class names from above>">
+  <VueResponsiveTable class="<class names from above>">
     <!-- ... -->
-  </VueGridTable>
+  </VueResponsiveTable>
 </template>
 ```
 
@@ -36,9 +36,9 @@ Example:
 
 ```vue
 <template>
-  <VueGridTable class="vue-responsive-table--container vue-responsive-table--container--bordered">
+  <VueResponsiveTable class="vue-responsive-table--container vue-responsive-table--container--bordered">
     <!-- ... -->
-  </VueGridTable>
+  </VueResponsiveTable>
 </template>
 ```
 
@@ -46,9 +46,9 @@ Example 2:
 
 ```vue
 <template>
-  <VueGridTable class="vue-responsive-table vue-responsive-table--bordered">
+  <VueResponsiveTable class="vue-responsive-table vue-responsive-table--bordered">
     <!-- ... -->
-  </VueGridTable>
+  </VueResponsiveTable>
 </template>
 ```
 

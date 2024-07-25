@@ -18,18 +18,18 @@ pnpm add -D vue-responsive-table
 
 ```js static noeditor
 // add it to your vue application:
-import VueGridTable from 'vue-responsive-table';
+import VueResponsiveTable from 'vue-responsive-table';
 import Vue from 'vue';
 
-Vue.component('GridTable', VueGridTable);
+Vue.component('VueResponsiveTable', VueResponsiveTable);
 
 // or
 
-import {GridTable} from 'vue-responsive-table';
+import {VueResponsiveTable} from 'vue-responsive-table';
 
 export default {
   components: {
-    GridTable,
+    VueResponsiveTable,
   },
 };
 ```
@@ -38,8 +38,8 @@ export default {
 
 ```vue
 <template>
-  <GridTable :items="items">
+  <VueResponsiveTable :items="items">
     <!-- ... -->
-  </GridTable>
+  </VueResponsiveTable>
 </template>
 ```

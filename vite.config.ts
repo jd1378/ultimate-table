@@ -37,7 +37,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: 'src/entry.ts',
-      name: 'VueGridTable',
+      name: 'VueResponsiveTable',
       formats: ['es', 'cjs', 'umd'],
       fileName(format) {
         let extension = 'js';
