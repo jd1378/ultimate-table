@@ -179,7 +179,7 @@ defineSlots<
     /** replaces table rows if used. */
     tbody(props: { items: I; fields: T }): any;
     /** rendered after the tbody slot. */
-    tfoot(props: { items: I; fields: T }): any;
+    tfoot(props: { fields: T }): any;
     /** is rendered when there's no `items` to render. */
     empty(): any;
     /** is rendered as a whole row at the top of the table. */
