@@ -45,6 +45,10 @@ export default defineConfig({
         link: '/example-three/',
       },
       {  
+        text: 'Example Live',
+        link: '/example-live/',
+      },
+      {  
         text: 'Writing Wrappers',
         link: '/writing-wrappers/',
       },
