@@ -10,7 +10,7 @@
 
   /* Don't display the header on small screens*/
   .vue-grid-table [role='row']:first-of-type {
-    display: hidden;
+    display: none;
   }
 
   /* cell content alignment */
