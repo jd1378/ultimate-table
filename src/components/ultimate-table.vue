@@ -94,7 +94,7 @@
 </template>
 
 <script lang="ts">
-import type { F } from 'ts-toolbelt';
+import type { Narrow } from '../types/Narrow';
 import { type PropType, computed } from 'vue';
 import { toStartCase } from '../utils/string';
 
@@ -138,7 +138,7 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 
 type FT = U[K extends keyof U ? K : never] | unknown;
 
-type NarrowedArray = F.Narrow<T>[number];
+type NarrowedArray = Narrow<T>[number];
 type RowDataTypeUsingFields = T extends readonly string[]
   ? {
       [Key in NarrowedArray as Key extends string ? Key : never]: unknown;

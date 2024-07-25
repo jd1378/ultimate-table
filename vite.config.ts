@@ -24,6 +24,10 @@ export default defineConfig({
           src: 'src/styles',
           dest: '.',
         },
+        {
+          src: 'src/types',
+          dest: '.',
+        },
       ],
     }),
   ],
