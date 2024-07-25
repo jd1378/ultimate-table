@@ -25,6 +25,10 @@ export default defineConfig({
         link: '/getting-started',
       },
       {  
+        text: 'Styling',
+        link: '/styling',
+      },
+      {  
         text: 'Example 1',
         link: '/example-one/',
       },
