@@ -44,6 +44,10 @@ export default defineConfig({
         text: 'Example 3 (container)',
         link: '/example-three/',
       },
+      {  
+        text: 'Writing Wrappers',
+        link: '/writing-wrappers/',
+      },
       {
         text: 'Components',
         items: sidebarComponents.map(comp => {
