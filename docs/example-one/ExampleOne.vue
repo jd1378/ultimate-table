@@ -11,8 +11,8 @@
 import { VueGridTable } from '@/entry';
 import type { FieldsFromType } from '@/entry';
 import { generateUsers, type User } from '../utils.ts';
-import '@/styles/base.css';
-import '@/styles/base.bordered.css';
+import '@/styles/basic.css';
+import '@/styles/basic.bordered.css';
 
 const dateTimeFormatter = new Intl.DateTimeFormat('en', {
   day: 'numeric',
