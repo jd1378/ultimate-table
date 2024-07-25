@@ -86,9 +86,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.6
         version: 3.4.6
-      ts-toolbelt:
-        specifier: ^9.6.0
-        version: 9.6.0
       tslib:
         specifier: ^2.6.3
         version: 2.6.3
@@ -2755,9 +2752,6 @@ packages:
 
   ts-map@1.0.3:
     resolution: {integrity: sha512-vDWbsl26LIcPGmDpoVzjEP6+hvHZkBkLW7JpvwbCv/5IYPJlsbzCVXY3wsCeAxAUeTclNOUZxnLdGh3VBD/J6w==}
-
-  ts-toolbelt@9.6.0:
-    resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
   tsconfck@3.1.1:
     resolution: {integrity: sha512-00eoI6WY57SvZEVjm13stEVE90VkEdJAFGgpFLTsZbJyW/LwFQ7uQxJHWpZ2hzSWgCPKc9AnBnNP+0X7o3hAmQ==}
@@ -5869,8 +5863,6 @@ snapshots:
   ts-interface-checker@0.1.13: {}
 
   ts-map@1.0.3: {}
-
-  ts-toolbelt@9.6.0: {}
 
   tsconfck@3.1.1(typescript@5.5.4):
     optionalDependencies:
