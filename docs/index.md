@@ -1,3 +1,3 @@
 # Welcome
 
-to the `vue-grid-table` docs. use the left sidebar to explore the docs.
+to the `vue-responsive-table` docs. use the left sidebar to explore the docs.

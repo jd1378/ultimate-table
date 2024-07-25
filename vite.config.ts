@@ -48,7 +48,7 @@ export default defineConfig({
         } else if (format === 'umd') {
           extension = 'umd.c' + extension;
         }
-        return `vue-grid-table.${extension}`;
+        return `vue-responsive-table.${extension}`;
       },
     },
     rollupOptions: {
@@ -58,7 +58,7 @@ export default defineConfig({
       external: ['vue'],
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'main.css') return 'vue-grid-table.css';
+          if (assetInfo.name === 'main.css') return 'vue-responsive-table.css';
           return assetInfo.name as string;
         },
         exports: 'named',

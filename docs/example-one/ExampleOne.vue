@@ -1,6 +1,6 @@
 <template>
   <VueGridTable
-    class="vue-grid-table vue-grid-table--bordered"
+    class="vue-responsive-table vue-responsive-table--bordered"
     :items="users"
     :fields="fields"
   >

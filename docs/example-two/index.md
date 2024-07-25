@@ -14,4 +14,4 @@ import ExampleTwo from "./ExampleTwo.vue";
 </script>
 ```
 
-Source for Example 2 is found here: <https://github.com/jd1378/vue-grid-table/tree/main/docs/example-two/ExampleTwo.vue>
+Source for Example 2 is found here: <https://github.com/jd1378/vue-responsive-table/tree/main/docs/example-two/ExampleTwo.vue>

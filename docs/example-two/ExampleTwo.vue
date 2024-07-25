@@ -1,6 +1,6 @@
 <template>
   <VueGridTable
-    class="vue-grid-table vue-grid-table--borderless"
+    class="vue-responsive-table vue-responsive-table--borderless"
     :items="users"
     :fields="fields"
     :sort="{ id: 1 }"

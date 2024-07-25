@@ -7,25 +7,25 @@
 ## Install
 
 ```bash
-npm install --save-dev vue-grid-table
+npm install --save-dev vue-responsive-table
 # or 
-yarn add -D vue-grid-table
+yarn add -D vue-responsive-table
 # or 
-pnpm add -D vue-grid-table
+pnpm add -D vue-responsive-table
 ```
 
 ## Load Component
 
 ```js static noeditor
 // add it to your vue application:
-import VueGridTable from 'vue-grid-table';
+import VueGridTable from 'vue-responsive-table';
 import Vue from 'vue';
 
 Vue.component('GridTable', VueGridTable);
 
 // or
 
-import {GridTable} from 'vue-grid-table';
+import {GridTable} from 'vue-responsive-table';
 
 export default {
   components: {

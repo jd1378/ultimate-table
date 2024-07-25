@@ -1,4 +1,4 @@
-# vue-grid-table
+# vue-responsive-table
 
 ## Props
 

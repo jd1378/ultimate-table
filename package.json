@@ -1,21 +1,21 @@
 {
-  "name": "vue-grid-table",
+  "name": "vue-responsive-table",
   "version": "1.0.0",
   "description": "a responsive column-stackable type-safe table that is made from grid",
   "author": "jd1378",
   "license": "MIT",
   "type": "module",
-  "main": "dist/vue-grid-table.umd.js",
-  "module": "dist/vue-grid-table.es.mjs",
+  "main": "dist/vue-responsive-table.umd.js",
+  "module": "dist/vue-responsive-table.es.mjs",
   "types": "./dist/entry.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue-grid-table.mjs",
-      "require": "./dist/vue-grid-table.umd.cjs",
+      "import": "./dist/vue-responsive-table.mjs",
+      "require": "./dist/vue-responsive-table.umd.cjs",
       "types": "./dist/entry.d.ts"
     },
     "./cjs": {
-      "default": "./dist/vue-grid-table.cjs",
+      "default": "./dist/vue-responsive-table.cjs",
       "types": "./dist/entry.d.ts"
     },
     "./styles": {
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:jd1378/vue-grid-table.git"
+    "url": "git@github.com:jd1378/vue-responsive-table.git"
   },
   "devDependencies": {
     "@types/node": "^20.14.12",

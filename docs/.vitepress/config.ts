@@ -15,9 +15,9 @@ const sidebarComponents = globbySync('components/**/*.md', { cwd: path.resolve(_
 
 export default defineConfig({
   // site-level options
-  title: 'vue-grid-table',
+  title: 'vue-responsive-table',
   description: 'a responsive column-stackable type-safe table that is made from grid',
-  base: '/vue-grid-table/',
+  base: '/vue-responsive-table/',
   themeConfig: {
     sidebar: [
       {  
