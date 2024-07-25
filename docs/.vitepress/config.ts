@@ -29,6 +29,10 @@ export default defineConfig({
         link: '/styling',
       },
       {  
+        text: 'Typescript',
+        link: '/typescript',
+      },
+      {  
         text: 'Example 1',
         link: '/example-one/',
       },
