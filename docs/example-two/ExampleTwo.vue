@@ -7,10 +7,12 @@
   >
     <template #cell(id)="{ item }">#{{ item.id }}</template>
     <template #head()="{ field, sort }">
-      {{ field.label }}
-      <button v-if="sort" type="button" class="sort-btn">
-        {{ sort === 1 ? '↑' : '↓' }}
-      </button>
+      <div>
+        {{ field.label }}
+        <button v-if="sort" type="button" class="sort-btn">
+          {{ sort === 1 ? '↑' : '↓' }}
+        </button>
+      </div>
     </template>
   </VueGridTable>
 </template>
