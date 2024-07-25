@@ -27,12 +27,15 @@
     "src/**/*.vue"
   ],
   "keywords": [
-    "vue",
     "grid",
     "table",
+    "vue",
     "responsive",
     "grid-table",
-    "component"
+    "component",
+    "super",
+    "awesome",
+    "ultimate"
   ],
   "scripts": {
     "serve": "vite",
