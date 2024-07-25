@@ -11,7 +11,7 @@
 
 <script setup> 
 import "vue-live/style.css";
-import "prismjs/themes/prism.min.css";
+import "./prism.css";
 
 defineProps({
   lang: String
