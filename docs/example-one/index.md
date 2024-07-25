@@ -1,4 +1,4 @@
-# Example
+# Example 1
 
 an example of bordered style of the table:
 
@@ -12,4 +12,4 @@ import ExampleOne from "./ExampleOne.vue";
 </script>
 ```
 
-Source for Example1 is found here: <https://github.com/jd1378/vue-grid-table/tree/main/docs/example-one/ExampleOne.vue>
+Source for Example 1 is found here: <https://github.com/jd1378/vue-grid-table/tree/main/docs/example-one/ExampleOne.vue>
