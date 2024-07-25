@@ -1,6 +1,6 @@
 # ultimate-table
 
-a responsive column-stackable type-safe table that is made from grid
+a responsive column-stackable type-safe table that is made from grid for vue 3
 
 See the docs: <https://jd1378.github.io/ultimate-table/>
 
