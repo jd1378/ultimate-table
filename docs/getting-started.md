@@ -17,7 +17,7 @@ pnpm add -D vue-grid-table
 import VueGridTable from 'vue-grid-table';
 import Vue from 'vue';
 
-Vue.use(VueGridTable);
+Vue.component('GridTable', VueGridTable);
 
 // or
 
@@ -28,4 +28,14 @@ export default {
     GridTable,
   },
 };
+```
+
+## Use it
+
+```vue
+<template>
+  <GridTable :items="items">
+    <!-- ... -->
+  </GridTable>
+</template>
 ```
