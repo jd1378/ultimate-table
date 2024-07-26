@@ -136,7 +136,7 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
  * the extra div wrapper around the component is there to make the container query styling possible
  */
 
-type FT = U[K extends keyof U ? K : never] | unknown;
+type NarrowedField = Field<K, U[K extends keyof U ? K : never] | unknown>;
 
 type NarrowedArray = Narrow<T>[number];
 type RowDataTypeUsingFields = T extends readonly string[]
@@ -165,17 +165,17 @@ defineSlots<
     [C in `cell(${string})`]: (props: { item: RowDataType }) => any;
   } & {
     [C in `head(${CellNames & string})`]: (props: {
-      field: Field<K, FT>;
+      field: NarrowedField;
       sort: 1 | -1 | 0;
     }) => any;
   } & {
     [C in `head(${string})`]: (props: {
-      field: Field<K, FT>;
+      field: NarrowedField;
       sort: 1 | -1 | 0;
     }) => any;
   } & {
     /** replaces all `head(fieldKey)` slots if used. it is called multiple times with each field passed in it's scope. */
-    'head()'(props: { field: Field<K, FT>; sort: 1 | -1 | 0 }): any;
+    'head()'(props: { field: NarrowedField; sort: 1 | -1 | 0 }): any;
     /** replaces default column headers */
     thead(props: { fields: T }): any;
     /** replaces table rows if used. */
@@ -271,27 +271,27 @@ const normalizedFields = computed(() => {
     return Object.keys(props.items[0]!).map((key) => ({
       key,
       label: toStartCase(key),
-    })) as Field<K, FT>[];
+    })) as NarrowedField[];
   }
 
   if (isStringArray(props.fields)) {
     return props.fields.map(
-      (s) => ({ key: s, label: toStartCase(s) }) as any as Field<K, FT>,
+      (s) => ({ key: s, label: toStartCase(s) }) as any as NarrowedField,
     );
   } else if (props.fields) {
-    return (props.fields as Field<K, FT>[]).map((f) => {
+    return (props.fields as NarrowedField[]).map((f) => {
       if (f['label'] || !f['key']) return f;
       return { ...f, label: toStartCase(f['key']) };
     });
   }
-  return [] as Field<K, FT>[];
+  return [] as NarrowedField[];
 });
 
-function getFieldContent(item: any, field: Field<K, FT>) {
+function getFieldContent(item: any, field: NarrowedField) {
   return field.formatter ? field.formatter(item[field.key]) : item[field.key];
 }
 
-function getFieldSize(f: Field<K, FT>) {
+function getFieldSize(f: NarrowedField) {
   if (f.size) {
     return f.size;
   } else if (props.items?.length) {
@@ -336,13 +336,13 @@ const stackingStructure = computed(() => {
       return accu;
     },
     {
-      map: {} as Record<string, Field<K, FT>[]>,
+      map: {} as Record<string, NarrowedField[]>,
       sizeMap: {} as Record<string, number[]>,
       sizes: [] as Array<number | number[]>,
       normalizedSizes: [] as Array<number>,
       smallestSize: 1 as number,
       sizeSum: 0 as number,
-      fields: [] as Array<Field<K, FT>[]>,
+      fields: [] as Array<NarrowedField[]>,
     },
   );
 
