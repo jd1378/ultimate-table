@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot name="before" :fields="(fields as T)"></slot>
     <ol
       role="table"
       aria-rowcount="-1"
@@ -9,7 +10,6 @@
         '--tb-tp': gridColumnTemplate,
       }"
     >
-      <slot name="top" :fields="(fields as T)"></slot>
       <!-- table header -->
       <slot name="thead" :fields="(fields as T)">
         <li role="row" data-thead>
@@ -88,8 +88,9 @@
       <slot v-else name="empty">
         <span>No Data</span>
       </slot>
-      <slot name="bottom" :fields="(fields as T)"></slot>
+      <slot></slot>
     </ol>
+    <slot name="after" :fields="(fields as T)"></slot>
   </div>
 </template>
 
@@ -193,10 +194,12 @@ defineSlots<
     tbody(props: { items: I; fields: T }): any;
     /** is rendered when there's no `items` to render. */
     empty(): any;
-    /** is rendered as a whole row at the top of table. */
-    top(props: { fields: T }): any;
-    /** is rendered as a whole row at the bottom of table. */
-    bottom(props: { fields: T }): any;
+    /** is rendered inside the table at the end */
+    default(): any;
+    /** is rendered before table */
+    before(props: { fields: T }): any;
+    /** is rendered after table */
+    after(props: { fields: T }): any;
   }
 >();
 

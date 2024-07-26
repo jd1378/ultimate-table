@@ -73,13 +73,14 @@ const sort = {
 
 ## Slots
 
-| Name   | Description                                                                                                    | Bindings                                                                                                                |
-| ------ | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| head() | replaces all `head(fieldKey)` slots if used. it is called multiple times with each field passed in it's scope. | **field** `Field&lt;string, unknown&gt;` - <br/>**sort** `0 \| 1 \| -1` -                                               |
-| thead  | replaces default column headers                                                                                | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
-| tbody  | replaces table rows if used.                                                                                   | **items** `ArrayLike&lt;unknown&gt;` - <br/>**fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` - |
-| empty  | is rendered when there's no `items` to render.                                                                 |                                                                                                                         |
-| top    | is rendered as a whole row at the top of table.                                                                | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
-| bottom | is rendered as a whole row at the bottom of table.                                                             | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
+| Name    | Description                                                                                                    | Bindings                                                                                                                |
+| ------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| head()  | replaces all `head(fieldKey)` slots if used. it is called multiple times with each field passed in it's scope. | **field** `Field&lt;string, unknown&gt;` - <br/>**sort** `0 \| 1 \| -1` -                                               |
+| thead   | replaces default column headers                                                                                | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
+| tbody   | replaces table rows if used.                                                                                   | **items** `ArrayLike&lt;unknown&gt;` - <br/>**fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` - |
+| empty   | is rendered when there's no `items` to render.                                                                 |                                                                                                                         |
+| default | is rendered inside the table at the end                                                                        |                                                                                                                         |
+| before  | is rendered before table                                                                                       | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
+| after   | is rendered after table                                                                                        | **fields** `readonly string[] \| readonly Field&lt;string, unknown&gt;[]` -                                             |
 
 ---
