@@ -118,7 +118,7 @@ export type Field<K extends string, U> = {
 
 export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 
-type ItemTypeUsingFields<
+export type ItemTypeUsingFields<
   F extends readonly Field<string, unknown>[] | readonly string[],
 > = F extends readonly string[]
   ? {
