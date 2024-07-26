@@ -4,20 +4,27 @@ Having a cool table is not useful on It's own. You want to build another compone
 
 to create a wrapper that can pass the slots to the original table and keep the types, define your own slots using `defineSlots` macro and include all slot names that are present in the original table. Types for `fields` and `items` can come from a typed api client.
 
-a very simple example:
+Example:
 
 ```vue
-<script setup lang="ts">
-type YourUserApiResponse = {
-  id: number;
-}
-type ColumnNames = keyof YourUserApiResponse;
+<script setup lang="ts"
+  generic="U, const K extends keyof U & string | string, const T extends readonly Field<K, U[K extends keyof U ? K : never] | unknown>[] | readonly string[]">
+import {
+  UltimateTable,
+  type ItemTypeUsingFields,
+  type FieldKeys,
+  type Field,
+} from 'ultimate-table';
+
+type ItemType = ItemTypeUsingFields<T>;
+
+type CellNames = keyof FieldKeys<T>;
 
 defineSlots<
   {
-    [C in `cell(${ColumnNames})`]: (props: {item: YourUserApiResponse}) => any;
+    [C in `cell(${CellNames & string})`]: (props: {item: ItemType}) => any;
   } & {
-    [C in `cell(${string})`]: (props: {item: YourUserApiResponse}) => any;
+    [C in `cell(${string})`]: (props: {item: ItemType}) => any;
   } & {
     empty(): any;
     // any other slot type you want to expose from ultimate-table
@@ -26,15 +33,18 @@ defineSlots<
 >();
 
 defineProps<{
-  fields: readonly (Field<ColumnNames, never> | Field<string, unknown>)[];
-}>(),
+  fields: T;
+}>();
+
+// ... rest of your code
 
 
 // @vue-skip in the template helps ignore the unnecessary type checks done by vscode extension for our wrapper
+// fields type also throws unnecessary error which you can ignore by casting to any or do `:fields="fields as Parameters<typeof UltimateTable>['0']['fields']"`
 </script>
 
 <template>
-  <ultimate-table>
+  <ultimate-table :fields="(fields as any)">
     <!-- @vue-skip -->
     <template v-for="(_, slot) in $slots" #[slot]="scope">
       <slot :name="slot" v-bind="scope" />
