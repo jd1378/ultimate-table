@@ -57,7 +57,7 @@
       ></slot>
       <template v-else-if="(items as any)?.length">
         <li
-          v-for="(item, i) in items as RowDataType[]"
+          v-for="(item, i) in items as ItemType[]"
           :key="(item as any).id || 'r' + i"
           role="row"
         >
@@ -117,6 +117,29 @@ export type Field<K extends string, U> = {
 };
 
 export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
+
+type ItemTypeUsingFields<
+  F extends readonly Field<string, unknown>[] | readonly string[],
+> = F extends readonly string[]
+  ? {
+      [Key in Narrow<F>[number] as Key extends string ? Key : never]: unknown;
+    } & Record<string, unknown>
+  : {
+      [Key in Narrow<F>[number] as Key extends { key: string }
+        ? Key['key']
+        : // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          never]: Key extends Field<infer _K, infer Z> ? Z : never;
+    } & Record<string, unknown>;
+
+export type InferItem<
+  I,
+  F extends readonly Field<string, unknown>[] | readonly string[],
+> =
+  I extends ArrayLike<infer AL>
+    ? keyof AL extends never
+      ? ItemTypeUsingFields<F>
+      : AL
+    : ItemTypeUsingFields<F>;
 </script>
 
 <script
@@ -138,31 +161,15 @@ export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 
 type NarrowedField = Field<K, U[K extends keyof U ? K : never] | unknown>;
 
-type NarrowedArray = Narrow<T>[number];
-type RowDataTypeUsingFields = T extends readonly string[]
-  ? {
-      [Key in NarrowedArray as Key extends string ? Key : never]: unknown;
-    } & Record<string, unknown>
-  : {
-      [Key in NarrowedArray as Key extends { key: string }
-        ? Key['key']
-        : never]: Key extends Field<infer _K, infer Z> ? Z : never;
-    } & Record<string, unknown>;
+type ItemType = InferItem<I, T>;
 
-type RowDataType =
-  I extends ArrayLike<infer AL>
-    ? keyof AL extends never
-      ? RowDataTypeUsingFields
-      : AL
-    : RowDataTypeUsingFields;
-
-type CellNames = keyof RowDataType;
+type CellNames = keyof ItemType;
 
 defineSlots<
   {
-    [C in `cell(${CellNames & string})`]: (props: { item: RowDataType }) => any;
+    [C in `cell(${CellNames & string})`]: (props: { item: ItemType }) => any;
   } & {
-    [C in `cell(${string})`]: (props: { item: RowDataType }) => any;
+    [C in `cell(${string})`]: (props: { item: ItemType }) => any;
   } & {
     [C in `head(${CellNames & string})`]: (props: {
       field: NarrowedField;
