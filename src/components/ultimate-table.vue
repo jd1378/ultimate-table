@@ -118,18 +118,22 @@ export type Field<K extends string, U> = {
 
 export type FieldsFromType<T> = Field<`${string & keyof T}`, T[keyof T]>[];
 
-export type ItemTypeUsingFields<
+export type FieldKeys<
   F extends readonly Field<string, unknown>[] | readonly string[],
 > = F extends readonly string[]
   ? {
       [Key in Narrow<F>[number] as Key extends string ? Key : never]: unknown;
-    } & Record<string, unknown>
+    }
   : {
       [Key in Narrow<F>[number] as Key extends { key: string }
         ? Key['key']
         : // eslint-disable-next-line @typescript-eslint/no-unused-vars
           never]: Key extends Field<infer _K, infer Z> ? Z : never;
-    } & Record<string, unknown>;
+    };
+
+export type ItemTypeUsingFields<
+  F extends readonly Field<string, unknown>[] | readonly string[],
+> = FieldKeys<F> & Record<string, unknown>;
 
 export type InferItem<
   I,

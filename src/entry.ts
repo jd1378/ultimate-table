@@ -4,6 +4,7 @@ export type {
   FieldsFromType,
   InferItem,
   ItemTypeUsingFields,
+  FieldKeys,
 } from './components/ultimate-table.vue';
 
 export { UltimateTable };
