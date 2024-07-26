@@ -21,7 +21,7 @@
     background-color: rgb(156 163 175 / 0.2);
   }
 
-  .ultimate-table--bordered {
+  .ultimate-table--bordered > ol {
     border: 1px solid gray;
     border-right: none;
     border-bottom: none;
