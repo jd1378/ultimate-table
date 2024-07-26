@@ -106,7 +106,7 @@ export type Field<K extends string, U> = {
   /** can this field be sorted? useful for creating wrapper components. */
   sortable?: boolean;
   /** if set, will be used to format the data of this field in each row. */
-  formatter?: (value: unknown) => string;
+  formatter?: (value: any) => string;
   /** type of this field. used for defining `fields` prop of the table. */
   type?: PropType<U>;
   /** average content length of this field in characters (ch) unit. columns of this field won't be smaller than this size */
