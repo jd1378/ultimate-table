@@ -65,7 +65,7 @@
   }
 
   /* cell content alignment */
-  .ultimate-table [role='cell'],
+
   .ultimate-table [role='columnheader'] {
     text-align: center;
     display: flex;
@@ -73,6 +73,10 @@
     justify-content: center;
     width: 100%;
     min-width: 0px;
+  }
+
+  /* prevents cell from overflowing to other cells */
+  .ultimate-table [role='cell'] {
     overflow-wrap: anywhere;
   }
 

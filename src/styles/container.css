@@ -77,9 +77,13 @@
     justify-content: center;
     width: 100%;
     min-width: 0px;
+   
+  }
+  
+  /* prevents cell from overflowing to other cells */
+  .ultimate-table--container [role='cell'] {
     overflow-wrap: anywhere;
   }
-
 }
 
 .ultimate-table--container li[role='row'] {
