@@ -1,6 +1,6 @@
 {
   "name": "ultimate-table",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a responsive column-stackable type-safe table that is made from grid for vue 3",
   "author": "jd1378",
   "license": "MIT",
