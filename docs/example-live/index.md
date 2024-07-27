@@ -70,6 +70,7 @@ Editable example of bordered style of the table:
   /* most important part for table (part 2) */
   .ultimate-table--custom [data-group] {
     grid-template-columns: var(--cg-tp);
+    grid-auto-rows: 1fr;
     display: grid;
   }
 

@@ -55,6 +55,7 @@
   /* most important part for table (part 2) */
   .ultimate-table--container [data-group] {
     grid-template-columns: var(--cg-tp);
+    grid-auto-rows: 1fr;
     display: grid;
   }
 
