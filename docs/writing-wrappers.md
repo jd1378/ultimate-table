@@ -11,20 +11,17 @@ Example:
   generic="U, const K extends keyof U & string | string, const T extends readonly Field<K, U[K extends keyof U ? K : never] | unknown>[] | readonly string[]">
 import {
   UltimateTable,
-  type ItemTypeUsingFields,
   type FieldKeys,
   type Field,
 } from 'ultimate-table';
 
-type ItemType = ItemTypeUsingFields<T>;
-
-type CellNames = keyof FieldKeys<T>;
+type FK = FieldKeys<T>;
 
 defineSlots<
   {
-    [C in `cell(${CellNames & string})`]: (props: {item: ItemType}) => any;
+    [C in keyof FK as `cell(${C & string})`]: (props: {item: FK}) => any;
   } & {
-    [C in `cell(${string})`]: (props: {item: ItemType}) => any;
+    [C in `cell(${string})`]: (props: {item: FK}) => any;
   } & {
     empty(): any;
     // any other slot type you want to expose from ultimate-table

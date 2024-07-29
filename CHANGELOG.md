@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.3
+
+fix type issue with scoped slots. items should now have the correct types.
+updated the writing wrappers guide.
+
 ## v1.1.2
 
 updated styles to make only cell break words at any point to prevent overflow to other cells
