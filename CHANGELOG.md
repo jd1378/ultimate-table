@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.4
+
+fix package entry point for mjs
+
 ## v1.1.3
 
 fix type issue with scoped slots. items should now have the correct types.
