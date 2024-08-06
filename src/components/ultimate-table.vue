@@ -41,7 +41,9 @@
                   :field="field"
                   :sort="getFieldSort(field.key)"
                 >
-                  {{ field.label || field.key }}
+                  {{
+                    typeof field.label === 'string' ? field.label : field.key
+                  }}
                 </slot>
               </slot>
             </div>
@@ -76,7 +78,9 @@
               v-for="field in structureFields"
               :key="field.key"
               role="cell"
-              :data-label="field.label || field.key"
+              :data-label="
+                typeof field.label === 'string' ? field.label : field.key
+              "
             >
               <slot :name="`cell(${field.key})`" :item="item">
                 {{ getFieldContent(item, field) }}
@@ -306,7 +310,7 @@ const normalizedFields = computed(() => {
     );
   } else if (props.fields) {
     return (props.fields as NarrowedField[]).map((f) => {
-      if (f['label'] || !f['key']) return f;
+      if (typeof f['label'] === 'string' || !f['key']) return f;
       return { ...f, label: toStartCase(f['key']) };
     });
   }
