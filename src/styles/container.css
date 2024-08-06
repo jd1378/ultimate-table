@@ -35,8 +35,7 @@
   }
 
   /* label of the cell */
-  .ultimate-table--container [role='cell']::before,
-  .ultimate-table--container [role='columnheader']::before {
+  .ultimate-table--container [role='cell'][data-label]:not([data-label=""])::before {
     content: attr(data-label) ':';
     text-align: start; 
   }
