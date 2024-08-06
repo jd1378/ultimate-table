@@ -2,6 +2,7 @@
   <div>
     <slot name="before" :fields="(fields as T)"></slot>
     <ol
+      :data-table-empty="!(items as any)?.length"
       role="table"
       aria-rowcount="-1"
       :style="{
