@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.1.6
+
+add `data-table-empty` attribute to table if its items length is 0
+
+## v1.1.5
+
+add label for small screens only if label is not empty
+
 ## v1.1.4
 
 fix package entry point for mjs
